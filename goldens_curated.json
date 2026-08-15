@@ -1,0 +1,37 @@
+[
+  {
+    "category": "factual",
+    "input": "What was the project originally named when it launched, and what caused it to be renamed to Moltbot?",
+    "expected_output": "The project originally launched as \"Clawdbot\" on November 24, 2025, with a lobster mascot named \"Clawd.\" On January 27, 2026, Anthropic (the company behind Claude) sent a trademark notice to creator Peter Steinberger, citing the similarity between \"Clawd\" and \"Claude.\" This forced a rename, and the project was rebranded to \"Moltbot\" the same day, referencing how lobsters molt to grow."
+  },
+  {
+    "category": "numeric",
+    "input": "What are the minimum and recommended hardware requirements to run Moltbot?",
+    "expected_output": "According to the hardware requirements table, the minimum is 4GB RAM, 10GB of free storage space, any modern processor, and a stable internet connection. The recommended configuration is 8GB+ RAM, 20GB+ storage, a multi-core CPU, and a broadband connection."
+  },
+  {
+    "category": "multi_section_synthesis",
+    "input": "How do Moltbot's persistent memory and multi-channel integration work together to change how users interact with it?",
+    "expected_output": "Moltbot maintains long-term memory across sessions using local file storage, remembering previous conversations, user preferences, ongoing project context, custom instructions, and file/system configurations. This turns stateless question-answering into stateful collaboration. Combined with native integration across 9+ messaging channels (such as WhatsApp, Telegram, Discord, Slack, and Signal), users can reach the assistant from any device using familiar apps while it retains context. Together these give a continuous, device-agnostic collaboration that persists across days or weeks."
+  },
+  {
+    "category": "security",
+    "input": "What is the main security concern with how Moltbot stores sensitive data such as API keys?",
+    "expected_output": "All data persists locally on the user's filesystem in plaintext Markdown and JSON files, including API keys and credentials stored in plaintext. Configuration lives in ~/.moltbot/config/ alongside session histories and credentials. Because these secrets are unencrypted, anyone with filesystem access, a VPS provider, or malware could read all stored credentials, which is called out as a significant security concern."
+  },
+  {
+    "category": "unanswerable",
+    "input": "What was Moltbot's total revenue in 2025?",
+    "expected_output": "The report does not provide any revenue figures for Moltbot. It is an open-source project released under the MIT license, and the document discusses adoption metrics (such as GitHub stars) and the cost of running it rather than any revenue. Based on the provided context, this information is not available."
+  },
+  {
+    "category": "numeric",
+    "input": "How quickly did Moltbot grow on GitHub in terms of stars?",
+    "expected_output": "Moltbot grew exceptionally fast: about 9,000 stars in the first 24 hours after going viral, 60,000+ stars within 72 hours (January 24-27, 2026), and 103,000+ stars within three months of its initial launch. It also gained 17,830 stars in a single 24-hour period (January 28-29, 2026) and trended #1 on GitHub."
+  },
+  {
+    "category": "timeline",
+    "input": "The project changed names more than once. List every name it had, in order, with the dates.",
+    "expected_output": "The project had three names in sequence: (1) Clawdbot, launched November 24, 2025; (2) Moltbot, renamed on January 27, 2026 after Anthropic's trademark notice; and (3) OpenClaw, renamed on January 30, 2026 (just three days later), while the core functionality and codebase remained unchanged."
+  }
+]
