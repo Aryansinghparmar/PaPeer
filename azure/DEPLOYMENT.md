@@ -21,7 +21,7 @@ secret handling, an honest cost breakdown, persistence, and shutdown.
   (baked into the image at build time, ONNX/CPU, no external calls).
 - **Local state (ephemeral in the container):** LangGraph SQLite checkpoints
   (`checkpoints.db`), `sessions.json`, and `embedding_cache/`. These reset when a
-  revision restarts unless you mount Azure Files (see §7). For a portfolio demo,
+  revision restarts unless you mount Azure Files (see §8). For a portfolio demo,
   ephemeral is acceptable — Qdrant still holds the uploaded papers.
 
 ---
@@ -41,7 +41,7 @@ nothing.
 | **min-replicas = 0** (scale-to-zero) | Sleeps when idle; ~30–60 s cold start on first hit; sessions reset on wake | **≈ $0–a few $** (often within the free grant for light use) | ✅ **Recommended** — protects your $100 credit |
 | **min-replicas = 1** (always-on) | No cold start; always running | **≈ $30–75/mo** (1 replica × ~2.6 M vCPU-s minus the free grant) | ⚠️ Burns the $100 credit in ~1.5–3 months. Only for a short, active demo window — then delete |
 
-**Cost controls you should set (see §6):** a Cost Management **budget alert**, prefer
+**Cost controls you should set (see §7):** a Cost Management **budget alert**, prefer
 **scale-to-zero**, and **delete the resource group** after your interviews. There is
 also a small pay-as-you-go **Log Analytics** cost for the Container Apps environment's
 logs — minor, but real.
@@ -175,7 +175,63 @@ az containerapp update --name $APP --resource-group $RG --min-replicas 0
 
 ---
 
-## 6. Cost controls & shutdown
+## 6. Authentication (Easy Auth) — protect your public demo
+
+A public demo URL runs on **your** OpenAI/Tavily keys, so leaving it open invites cost
+abuse. Azure Container Apps has **built-in authentication ("Easy Auth")** — a
+platform-managed sidecar that gates requests *before* they reach the app, so you write
+**zero auth code**. Provider: **Microsoft Entra ID** (social providers optional). It is
+**free on the student plan** (Entra ID free tier + no separate Easy Auth charge; the
+sidecar's compute is ~$0 under scale-to-zero).
+
+### Configure it multi-tenant (so reviewers can sign in)
+For a portfolio demo you want *humans* (interviewers) to sign in with their own account
+while *anonymous* traffic is blocked. Make the app registration **multi-tenant + personal
+Microsoft accounts** (`AzureADandPersonalMicrosoftAccount`). A **single-tenant**
+registration only admits accounts in *your* directory — reviewers would be locked out.
+
+### Portal (recommended — it also creates the app registration + secret for you)
+1. Container App → **Settings → Authentication → Add identity provider**.
+2. Provider **Microsoft**; let it **create a new app registration**.
+3. **Supported account types:** "Any Microsoft Entra directory and personal Microsoft
+   accounts" (multi-tenant).
+4. **Restrict access:** *Require authentication*. **Unauthenticated requests:**
+   *HTTP 302 redirect to login* (the browser flow Streamlit needs).
+5. Save. Every visitor now must sign in; anonymous bots are turned away.
+
+### CLI (reference)
+The Portal path is simplest because it provisions the registration *and* the client
+secret. If you prefer CLI, create the registration multi-tenant, then enable auth (you
+must also store a client secret, referenced by `--client-secret-setting-name`):
+
+```bash
+az ad app create --display-name "papeer-auth" \
+  --sign-in-audience AzureADandPersonalMicrosoftAccount
+CLIENT_ID=<appId-from-above>
+
+az containerapp auth microsoft update \
+  --name $APP --resource-group $RG \
+  --client-id $CLIENT_ID \
+  --issuer https://login.microsoftonline.com/common/v2.0
+az containerapp auth update \
+  --name $APP --resource-group $RG \
+  --action RedirectToLoginPage --redirect-provider azureactivedirectory
+```
+
+### What your app receives
+After sign-in, Easy Auth forwards the identity to the container as headers —
+`X-MS-CLIENT-PRINCIPAL-NAME` (the user) and `X-MS-CLIENT-PRINCIPAL` (base64 claims). The
+current Streamlit app doesn't need them, but the future FastAPI backend reads
+`X-MS-CLIENT-PRINCIPAL-NAME` as its auth hook (no token parsing required).
+
+> **After the React + FastAPI split:** auth moves to the frontend host. The plan puts the
+> React SPA on **Azure Static Web Apps**, which has its **own built-in auth** (Entra ID +
+> social) and links to the FastAPI backend on Container Apps — so the login gate lives at
+> the SPA (sign in via `/.auth/login/aad`, identity at `/.auth/me`) and the linked API
+> receives the forwarded principal header. At that point you configure auth on the Static
+> Web App, not the Container App.
+
+## 7. Cost controls & shutdown
 
 - **Budget alert:** Portal → **Cost Management → Budgets → Add** → e.g. $10/month with
   an alert at 80%. Do this before leaving the app running.
@@ -189,7 +245,7 @@ az containerapp update --name $APP --resource-group $RG --min-replicas 0
 
 ---
 
-## 7. Persistence (optional)
+## 8. Persistence (optional)
 
 Qdrant Cloud already persists uploaded papers, so a restart does **not** lose your
 document collections. What resets on a revision restart is local chat history
@@ -205,7 +261,7 @@ If you want chat history to survive restarts, mount **Azure Files**:
 
 ---
 
-## 8. Configuration reference
+## 9. Configuration reference
 
 | Variable | Purpose | Deploy as |
 |---|---|---|
@@ -223,7 +279,7 @@ have safe defaults in `backend/config.py` and can be added as env vars if needed
 
 ---
 
-## 9. Update / redeploy
+## 10. Update / redeploy
 
 Build and push a new tag, then point the app at it:
 
@@ -237,7 +293,7 @@ az containerapp update --name $APP --resource-group $RG \
 
 ---
 
-## 10. Troubleshooting
+## 11. Troubleshooting
 
 - **Slow first load / 502 on first hit (scale-to-zero):** the container is cold-starting
   and pulling the image. Wait ~30–60 s and retry, or use `--min-replicas 1` during demos.
@@ -246,7 +302,7 @@ az containerapp update --name $APP --resource-group $RG \
 - **App loads but chat errors:** a secret/env var is missing or wrong. Check
   **Revisions → console logs** and re-verify the five secrets.
 - **Sessions "reset":** expected with scale-to-zero or multi-replica. Keep
-  `--max-replicas 1` (Streamlit is single-node stateful) and mount Azure Files (§7)
+  `--max-replicas 1` (Streamlit is single-node stateful) and mount Azure Files (§8)
   if persistence matters.
 - **Health:** the app serves `/_stcore/health`; Container Apps' default probe on the
   target port is sufficient.

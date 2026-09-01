@@ -9,6 +9,7 @@ dependencies = [
     "beautifulsoup4>=4.14.3",
     "chromadb>=1.5.9",
     "deepeval>=4.0.0",
+    "fastapi>=0.141.1",
     "fastembed>=0.8.0",
     "langchain-classic>=1.0.7",
     "langchain-community>=0.4.1",

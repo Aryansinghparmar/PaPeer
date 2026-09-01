@@ -340,20 +340,25 @@ def generate_answer_node(state: RAGState) -> dict:
     query = state["query"]
 
     if route == "retrieve":
-        if state.get("is_relevant") is False and state.get("rewrite_count", 0) >= 1:
+        # Prefer a grounded answer whenever we actually retrieved chunks. The binary
+        # relevancy gate inspects only the first few chunks and can be wrong, so
+        # refusing while retrieved_docs is non-empty produces answers that contradict
+        # the retrieved context (a faithfulness failure the evaluation surfaced on the
+        # security case). Only fall back to the canned "not found" message when
+        # retrieval is genuinely empty.
+        docs = state.get("retrieved_docs") or []
+        if docs:
+            context = "\n\n---\n\n".join(doc.page_content for doc in docs)
+            prompt = f"Answer the question using this context:\n\n{context}\n\nQuestion: {query}"
+            answer = llm.invoke([{"role": "user", "content": prompt}]).content
+        elif state.get("is_relevant") is False and state.get("rewrite_count", 0) >= 1:
             answer = (
                 "I wasn't able to find relevant information in the uploaded papers "
                 "to answer your question. You may want to rephrase your question "
                 "or upload additional papers."
             )
         else:
-            docs = state.get("retrieved_docs") or []
-            if not docs:
-                answer = "I don't know the answer."
-            else:
-                context = "\n\n---\n\n".join(doc.page_content for doc in docs)
-                prompt = f"Answer the question using this context:\n\n{context}\n\nQuestion: {query}"
-                answer = llm.invoke([{"role": "user", "content": prompt}]).content
+            answer = "I don't know the answer."
 
     elif route == "verify_claim":
         verdict = state.get("claim_verdict", "")
@@ -420,9 +425,8 @@ def after_relevancy_routing(state: RAGState) -> str:
     return "generate_answer"
 
 
-def build_graph(db_path: str = CHECKPOINT_DB_PATH):
-    conn = sqlite3.connect(db_path, check_same_thread=False)
-    checkpointer = SqliteSaver(conn)
+def _assemble_graph() -> StateGraph:
+    """Build the uncompiled workflow (nodes + edges), shared by sync and async."""
 
     graph = StateGraph(RAGState)
     graph.add_node("router", router_node)
@@ -465,5 +469,26 @@ def build_graph(db_path: str = CHECKPOINT_DB_PATH):
 
     graph.add_edge("verify_claim", "generate_answer")
     graph.add_edge("generate_answer", END)
+    return graph
 
-    return graph.compile(checkpointer=checkpointer)
+
+def build_graph(db_path: str = CHECKPOINT_DB_PATH):
+    """Sync graph with a SQLite checkpointer (used by Streamlit and the eval)."""
+
+    conn = sqlite3.connect(db_path, check_same_thread=False)
+    return _assemble_graph().compile(checkpointer=SqliteSaver(conn))
+
+
+async def build_graph_async(db_path: str = CHECKPOINT_DB_PATH):
+    """Async graph with an aiosqlite checkpointer (used by the FastAPI backend).
+
+    The node functions are unchanged; LangGraph runs the sync nodes in a thread
+    pool under ``astream``/``ainvoke``. Only the checkpointer differs so async
+    invocation persists state correctly.
+    """
+
+    import aiosqlite
+    from langgraph.checkpoint.sqlite.aio import AsyncSqliteSaver
+
+    conn = await aiosqlite.connect(db_path)
+    return _assemble_graph().compile(checkpointer=AsyncSqliteSaver(conn))

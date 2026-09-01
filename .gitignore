@@ -247,3 +247,26 @@ pytest-cache-files-*/
 # fastembed / HF local model cache (models download on first run)
 .fastembed_cache/
 local_cache/
+
+# User Sensitive / Working Files
+preparation/
+AGENT.md
+PREP_PROMPT.md
+sessions.json
+qdrant_login_steps.md
+
+# Eval / Output Artifacts
+eval_baseline.json
+eval_improved.json
+eval_results.json
+eval_comparison.md
+evaluate.py
+goldens.json
+goldens_curated.json
+graph.png
+
+# Other Private/Local Folders
+azure/
+documents/
+docker_install_on_AWS.txt
+

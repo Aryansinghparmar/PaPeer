@@ -6,7 +6,7 @@ from pathlib import Path
 
 import streamlit as st
 from langchain_core.callbacks import UsageMetadataCallbackHandler
-from langchain_core.messages import HumanMessage
+from langchain_core.messages import AIMessageChunk, HumanMessage
 from langchain_openai import ChatOpenAI
 
 from backend.btw_handler import handle_btw
@@ -373,7 +373,7 @@ if prompt := st.chat_input("Ask about your papers, verify a claim, or search the
             ):
                 if (
                     metadata.get("langgraph_node") == "generate_answer"
-                    and hasattr(chunk, "content")
+                    and isinstance(chunk, AIMessageChunk)
                     and chunk.content
                 ):
                     response_text += chunk.content

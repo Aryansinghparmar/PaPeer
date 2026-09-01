@@ -366,3 +366,38 @@ not marked complete until they actually run successfully.
   downstream answer-gating fallback (diagnosed, not yet fixed). Measured spend
   this session ≈ $0.83. Results in `eval_baseline.json`, `eval_improved.json`,
   `eval_comparison.md`.
+- 2026-08-16: Chapter 2 start (SWE-1 full-stack migration). Added the Azure Easy
+  Auth section to `azure/DEPLOYMENT.md` (Entra ID, multi-tenant, Portal+CLI).
+  **Fixed the answer-gating bug** in `generate_answer_node` (answer from
+  `retrieved_docs` when non-empty); the re-run confirms Faithfulness + Answer
+  Relevancy = 1.0 across all cases. **Honesty correction:** the re-run also showed
+  the retrieval A/B is within run-to-run noise at n=5 (two hybrid+rerank runs
+  straddle the baseline), so the earlier precision/recall "win" is not claimable
+  from single runs — multi-seed eval is the next step (`eval_comparison.md`,
+  Finding 2). Re-run spend ≈ $0.38.
+- 2026-08-16: Phase B-1 done — added an async graph variant (`build_graph_async`
+  with `AsyncSqliteSaver`) and a FastAPI backend (`api/`: sessions, documents,
+  chat SSE, `/btw`, `/health`, auth hook) reusing `backend/` unchanged. Verified
+  live: routes, session CRUD, SSE streaming, full RAG path (upload → hybrid +
+  rerank → grounded answer), history reconstruction. Fixed a streaming
+  double-emission (forward only `AIMessageChunk`, not the final full `AIMessage`)
+  in both `api/chat.py` and `app.py`. `fastapi` added to deps. Prep docs carry a
+  status banner pending the full post-React rewrite. React SPA (Phase B-2) is next.
+- 2026-08-16: Phase B-2 done — scaffolded `frontend/` (Vite + React 19 +
+  TypeScript + Tailwind v4), full parity with Streamlit: session sidebar,
+  document panel (upload/URL/ArXiv), streaming chat with Markdown rendering,
+  `/btw` side channel, graph-state inspector drawer. `npx tsc -b` and
+  `npm run build` pass cleanly. Verified live end-to-end against the running
+  FastAPI backend in a real browser: health, session CRUD, SSE token streaming,
+  full RAG retrieval, the empty-collection fallback, `/btw` (confirmed NOT
+  persisted via direct API check), and session switching. Found and fixed two
+  more bugs during this live testing: (1) a `streaming` UI-state race — the flag
+  stayed true briefly after the SSE `done` event already finalized the message;
+  (2) the `/btw` exchange didn't clear on session switch (Streamlit's original
+  only rendered it for one script run). Cleaned up all test sessions/Qdrant
+  collections and reset `sessions.json` afterward. Did a full rewrite of the
+  three `preparation/` docs (banners removed): `overview.md` restructured for
+  the new architecture; `Intro.md` reframed around the migration; `Q&A.md`
+  revised Q5/Q6/Q7/Q9/Q13/Q17/Q18/Q19/Q20 and added Q21 (SSE duplication bug)
+  and Q22 (frontend state-race bugs) — now 22 questions, all grounded in this
+  session's real, verified work.
