@@ -1,0 +1,50 @@
+# Secrets and local environment
+.env
+.env.*
+frontend/.env
+frontend/.env.*
+!frontend/.env.example
+.venv/
+.uv-cache/
+.claude/
+.deepeval/
+.git/
+
+# Build outputs and dependencies rebuilt inside the image
+frontend/node_modules/
+frontend/dist/
+__pycache__/
+*.py[cod]
+*.pyo
+.ruff_cache/
+.mypy_cache/
+.pytest_cache/
+
+# Runtime state (lives in the /data volume, never in the image)
+embedding_cache/
+observability/
+sessions.json
+sessions.json.*
+*.db
+*.db-shm
+*.db-wal
+*.db-journal
+
+# Not needed at runtime
+tests/
+results/
+documents/
+eval_*.json
+eval_*.md
+goldens*.json
+evaluate.py
+eval_router.py
+evals/
+scripts/
+graph.png
+graph_diag.ipynb
+report.md
+CLAUDE.md
+docs/
+*.txt
+!requirements.txt

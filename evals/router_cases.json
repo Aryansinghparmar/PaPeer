@@ -1,0 +1,35 @@
+[
+  {"id": "paper-01", "intent": "paper", "expected_route": "retrieve", "query": "What hardware does the report say you need to run Moltbot?"},
+  {"id": "paper-02", "intent": "paper", "expected_route": "retrieve", "query": "According to the paper, why was Clawdbot renamed?"},
+  {"id": "paper-03", "intent": "paper", "expected_route": "retrieve", "query": "Summarise the security risks this report identifies."},
+  {"id": "paper-04", "intent": "paper", "expected_route": "retrieve", "query": "What overall rating does the document give Moltbot, and what justifies it?"},
+  {"id": "paper-05", "intent": "paper", "expected_route": "retrieve", "query": "Which messaging channels does the uploaded paper say Moltbot integrates with?"},
+  {"id": "paper-06", "intent": "paper", "expected_route": "retrieve", "query": "How does the report describe Moltbot's persistent memory across sessions?"},
+  {"id": "paper-07", "intent": "paper", "expected_route": "retrieve", "query": "What method did the authors use to assess OpenClaw?"},
+  {"id": "paper-08", "intent": "paper", "expected_route": "retrieve", "query": "Does the paper recommend Moltbot for enterprises that need SSO and RBAC?"},
+  {"id": "paper-09", "intent": "paper", "expected_route": "retrieve", "query": "List the LLM providers mentioned in this report."},
+  {"id": "paper-10", "intent": "paper", "expected_route": "retrieve", "query": "What are the main conclusions of the uploaded research report?"},
+
+  {"id": "live-01", "intent": "live", "expected_route": "retrieve", "query": "How many GitHub stars does OpenClaw have right now?"},
+  {"id": "live-02", "intent": "live", "expected_route": "retrieve", "query": "What is the latest OpenClaw release version today?"},
+  {"id": "live-03", "intent": "live", "expected_route": "retrieve", "query": "Has there been any news about Moltbot this week?"},
+  {"id": "live-04", "intent": "live", "expected_route": "retrieve", "query": "What is today's USD to INR exchange rate?"},
+  {"id": "live-05", "intent": "live", "expected_route": "retrieve", "query": "Have any new OpenClaw security vulnerabilities been reported this month?"},
+
+  {"id": "verify-01", "intent": "verify", "expected_route": "verify_claim", "query": "Verify the paper's claim that Moltbot stores API keys in plaintext. Is that still true?"},
+  {"id": "verify-02", "intent": "verify", "expected_route": "verify_claim", "query": "Is the report's claim that OpenClaw lacks SSO support still accurate?"},
+  {"id": "verify-03", "intent": "verify", "expected_route": "verify_claim", "query": "The report says Moltbot needs at least 4GB of RAM. Has that been superseded?"},
+  {"id": "verify-04", "intent": "verify", "expected_route": "verify_claim", "query": "Has newer work overturned the paper's finding that local deployment is more private than VPS hosting?"},
+  {"id": "verify-05", "intent": "verify", "expected_route": "verify_claim", "query": "Check whether the claim 'self-hosted agents are unsuitable for regulated industries' still holds."},
+  {"id": "verify-06", "intent": "verify", "expected_route": "verify_claim", "query": "The paper claims Moltbot has no built-in authentication. Is that still the case?"},
+  {"id": "verify-07", "intent": "verify", "expected_route": "verify_claim", "query": "This paper claims transformers beat RNNs on long-range dependencies. Has recent research challenged that?"},
+  {"id": "verify-08", "intent": "verify", "expected_route": "verify_claim", "query": "Fact-check this finding from the report: Moltbot reached 60,000 GitHub stars within 72 hours."},
+
+  {"id": "direct-01", "intent": "general", "expected_route": "direct_answer", "query": "What is a vector database?"},
+  {"id": "direct-02", "intent": "general", "expected_route": "direct_answer", "query": "Explain what retrieval-augmented generation is."},
+  {"id": "direct-03", "intent": "general", "expected_route": "direct_answer", "query": "What does BM25 stand for, and how does it rank documents?"},
+  {"id": "direct-04", "intent": "general", "expected_route": "direct_answer", "query": "What is the difference between precision and recall?"},
+  {"id": "direct-05", "intent": "general", "expected_route": "direct_answer", "acceptable_routes": ["direct_answer", "retrieve"], "query": "Hi, what can you help me with?", "note": "Ambiguous: a greeting needs no retrieval, but the router prompt says to prefer retrieve when in doubt."},
+  {"id": "direct-06", "intent": "general", "expected_route": "direct_answer", "acceptable_routes": ["direct_answer", "retrieve"], "query": "Why do lobsters molt?", "note": "Ambiguous: general biology, but the paper explains the Moltbot name with lobster molting, so retrieve is defensible."},
+  {"id": "direct-07", "intent": "general", "expected_route": "direct_answer", "acceptable_routes": ["direct_answer", "retrieve"], "query": "Why is storing credentials in plaintext risky?", "note": "Ambiguous: general security knowledge, but it is also a central topic of the uploaded report."}
+]

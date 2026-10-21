@@ -1,0 +1,29 @@
+# Papeer on one port: http://localhost:8000 serves the SPA and the API.
+#
+#   cp .env.example .env    # fill in OPENAI/TAVILY/QDRANT keys + PAPEER_ACCESS_CODE
+#   docker compose up --build
+#
+# Sessions, checkpoints, the embedding cache and the cost ledger persist in the
+# named volume `papeer-data` (a local Docker volume, so SQLite is safe on it).
+services:
+  papeer:
+    build: .
+    image: papeer:local
+    env_file: .env
+    environment:
+      # Access-code gate unless .env / the shell says otherwise.
+      AUTH_MODE: ${AUTH_MODE:-api_key}
+      # Pinned here so a local-dev path in .env cannot move state out of /data.
+      CHECKPOINT_DB_PATH: /data/checkpoints.db
+      SESSIONS_FILE: /data/sessions.json
+      EMBEDDING_CACHE_DIR: /data/embedding_cache
+      METRICS_DIR: /data/observability
+      STATIC_DIR: /app/static
+    ports:
+      - "8000:8000"
+    volumes:
+      - papeer-data:/data
+    restart: unless-stopped
+
+volumes:
+  papeer-data:

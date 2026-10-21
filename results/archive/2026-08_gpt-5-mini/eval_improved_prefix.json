@@ -1,0 +1,437 @@
+{
+  "experiment": {
+    "label": "improved",
+    "goldens_source": "curated",
+    "judge_model": "gpt-5-mini",
+    "application_model": "gpt-5-mini",
+    "embedding_model": "text-embedding-3-small",
+    "retrieval_mode": "hybrid",
+    "rerank_enabled": true,
+    "retrieval_candidate_k": 20,
+    "rerank_top_n": 4,
+    "case_count": 5,
+    "case_start": 0,
+    "metric_threshold": 0.7,
+    "judge_cost_usd": 0.300821,
+    "app_cost_usd": 0.02476,
+    "total_cost_usd": 0.325581,
+    "avg_retrieved_chunks": 8.8,
+    "avg_latency_seconds": 35.36
+  },
+  "aggregate": {
+    "Contextual Precision": {
+      "avg_score": 0.9219,
+      "pass_rate": 0.8,
+      "passed": 4,
+      "n": 5
+    },
+    "Contextual Recall": {
+      "avg_score": 1.0,
+      "pass_rate": 1.0,
+      "passed": 5,
+      "n": 5
+    },
+    "Contextual Relevancy": {
+      "avg_score": 0.5117,
+      "pass_rate": 0.4,
+      "passed": 2,
+      "n": 5
+    },
+    "Answer Relevancy": {
+      "avg_score": 1.0,
+      "pass_rate": 1.0,
+      "passed": 5,
+      "n": 5
+    },
+    "Faithfulness": {
+      "avg_score": 0.9333,
+      "pass_rate": 0.8,
+      "passed": 4,
+      "n": 5
+    }
+  },
+  "tests": [
+    {
+      "input": "What are the minimum and recommended hardware requirements to run Moltbot?",
+      "category": "factual",
+      "actual_output": "Minimum:\n- RAM: 4 GB\n- Storage: 10 GB free space\n- CPU: Any modern processor\n- Network: Stable internet\n\nRecommended:\n- RAM: 8 GB+\n- Storage: 20 GB+\n- CPU: Multi-core\n- Network: Broadband\n\nNote: Moltbot runs on most modern Macs (Intel or Apple Silicon), Windows PCs (via WSL2), Linux machines, Raspberry Pi 4GB+ models, and VPS/cloud instances. The Gateway daemon uses very little CPU/memory at idle.",
+      "success": false,
+      "metrics": [
+        {
+          "name": "Contextual Precision",
+          "score": 0.6095238095238095,
+          "passed": false,
+          "evaluation_cost": 0.0082655,
+          "reason": "The score is 0.61 because the top-ranked node (rank 1) correctly contains the exact hardware table: 'RAM 4GB 8GB+', 'Storage 10GB free space 20GB+', 'CPU Any modern processor Multi-core', 'Network Stable internet Broadband', and related content appears again at rank 5 (duplicate hardware table) and rank 7 ('Outbound Connectivity (Required): HTTPS access to LLM provider APIs'), so relevant nodes are present early enough to lift the score. It is not higher because several irrelevant nodes are interleaved above or near those positives and should be ranked lower: node 2 (rank 2) focuses on 'Windows users must first install WSL2' and 'Node.js version 22 or higher', node 3 (rank 3) discusses deployment costs like 'VPS for automation: Run primary Moltbot instance on $5-24/month VPS', node 4 (rank 4) contains competitive/privacy text such as 'Privacy-First Architecture', node 6 (rank 6) again shows setup commands like 'wsl --install -d Ubuntu', and node 8 (rank 8) gives runtime/profile numbers 'RAM: 200-500MB baseline' that do not state the min/recommended hardware. Those irrelevant passages reduce precision even though the true hardware specs appear at ranks 1, 5, and 7."
+        },
+        {
+          "name": "Contextual Recall",
+          "score": 1.0,
+          "passed": true,
+          "evaluation_cost": 0.0039030000000000002,
+          "reason": "The score is 1.00 because sentence 1 (minimum requirements) and sentence 2 (recommended configuration) are directly supported by node(s) in retrieval context: node 1 (and repeated in node 5) contains the hardware table stating minimums — 4GB RAM, 10GB free storage, any modern processor, stable internet — and recommended — 8GB+ RAM, 20GB+ storage, multi-core CPU, broadband — so the expected output is fully reflected in the retrieved nodes."
+        },
+        {
+          "name": "Contextual Relevancy",
+          "score": 0.37,
+          "passed": false,
+          "evaluation_cost": 0.03408675,
+          "reason": "The score is 0.37 because most retrieved snippets are non-hardware or setup details (e.g. \"Table 5: Moltbot hardware requirements\" which \"does not itself state specific minimum or recommended hardware requirements\", \"install WSL2\", and \"Node.js version 22 or higher\"), while only a minority of statements actually provide concrete specs such as \"Minimum RAM: 4GB; Recommended RAM: 8GB+\", \"Storage: Minimum 10GB free space; Recommended 20GB+\", and \"Supported Hardware: Any Mac (Intel or Apple Silicon M1/M2/M3)\"."
+        },
+        {
+          "name": "Answer Relevancy",
+          "score": 1.0,
+          "passed": true,
+          "evaluation_cost": 0.004917,
+          "reason": "The score is 1.00 because the response contained no irrelevant statements and directly addressed the user’s question; it cannot be higher since 1.00 is the maximum possible score."
+        },
+        {
+          "name": "Faithfulness",
+          "score": 1.0,
+          "passed": true,
+          "evaluation_cost": 0.009188249999999999,
+          "reason": "The score is 1.00 because the Contradictions list is empty, indicating no discrepancies between the actual output and the retrieval context — well done!"
+        }
+      ]
+    },
+    {
+      "input": "What was the project originally named when it launched, and what caused it to be renamed to Moltbot?",
+      "category": "numeric",
+      "actual_output": "It originally launched as Clawdbot (also styled \"ClawdBot\"). It was renamed to Moltbot on Jan 27, 2026 after Anthropic sent a trademark notice objecting to the name’s similarity to \"Claude,\" effectively forcing the project to change its name.",
+      "success": false,
+      "metrics": [
+        {
+          "name": "Contextual Precision",
+          "score": 1.0,
+          "passed": true,
+          "evaluation_cost": 0.0104865,
+          "reason": "The score is 1.00 because nodes 1–8 (top-ranked) all directly provide the launch name and rename cause: node 1 quotes \"Nov 24, 2025\nOriginal launch as Clawdbot\" and \"The rebranding from Clawdbot to Moltbot occurred rapidly within hours on January 27, 2026\"; node 2 quotes \"On January 27, 2026, Anthropic... sent a trademark notice... similarity between \\\"Clawd\\\" and \\\"Claude\\\"\"; node 3 quotes \"ClawdBot Renamed to Moltbot. (2026, January 27)\"; node 4 quotes \"Forced first rename\nJan 27, 2026\nRebranded to Moltbot\"; node 5 reiterates the launch and rapid Jan 27 rebranding; node 6 includes both the trademark notice and Steinberger's \"Molt fits perfectly — it's what lobsters do to grow.\"; node 7 cites the renaming reference; and node 8 shows \"Moltbot (formerly Clawdbot)\" and \"trademark disputes.\" Because all top-ranked nodes are relevant, no irrelevant nodes are ranked above them, and 1.00 is the maximum possible score — a clean, correct ranking."
+        },
+        {
+          "name": "Contextual Recall",
+          "score": 1.0,
+          "passed": true,
+          "evaluation_cost": 0.005882499999999999,
+          "reason": "The score is 1.00 because node(s) in retrieval context directly support each sentence: sentence 1 (launch as “Clawdbot” on Nov 24, 2025 with mascot “Clawd”) is documented in node 1 (timeline: “Nov 24, 2025 — Original launch as Clawdbot”) and echoed by node 2 (narrative mentioning the mascot); sentence 2 (Jan 27, 2026 trademark notice from Anthropic citing similarity between “Clawd” and “Claude”) is supported by node 2 (detailed narrative) and by node 1 (timeline entry “Jan 27, 2026 — Anthropic trademark notice”); sentence 3 (forced rename to “Moltbot” the same day referencing molting) is recorded in node 1 (timeline noting the rebrand to Moltbot and the molt explanation). All expected statements are directly reflected in the cited node(s) in retrieval context, so the match is complete and well supported."
+        },
+        {
+          "name": "Contextual Relevancy",
+          "score": 0.5217391304347826,
+          "passed": false,
+          "evaluation_cost": 0.029412249999999997,
+          "reason": "The score is 0.52 because the retrieval does contain clear, directly relevant facts — e.g., 'The project originally launched as Clawdbot on Nov 24, 2025.' and 'Anthropic...sent a trademark notice...requesting a name change due to similarity between \"Clawd\" and \"Claude\"' — but much of the context is noisy or non‑answering: phrases like 'references the biological process of molting—when lobsters shed their shells to grow—symbolizing the project's transformation', 'created significant chaos', and structural items ('1.1 Original Name and Branding' / '1.2 Trademark Dispute with Anthropic') do not specify the original name or cause, which lowers overall relevancy."
+        },
+        {
+          "name": "Answer Relevancy",
+          "score": 1.0,
+          "passed": true,
+          "evaluation_cost": 0.00260025,
+          "reason": "The score is 1.00 because the output contained no irrelevant statements and directly addressed the question; it cannot be higher since 1.00 is the maximum possible score."
+        },
+        {
+          "name": "Faithfulness",
+          "score": 1.0,
+          "passed": true,
+          "evaluation_cost": 0.0077852500000000005,
+          "reason": "The score is 1.00 because the Contradictions list is empty (Contradictions: []), indicating no discrepancies between the actual output and the retrieval context — nice work!"
+        }
+      ]
+    },
+    {
+      "input": "How do Moltbot's persistent memory and multi-channel integration work together to change how users interact with it?",
+      "category": "multi_section_synthesis",
+      "actual_output": "In combination they turn Moltbot from a one-off chat responder into a continuous, cross-device collaborator.\n\nHow they work together (summary)\n- Persistent local memory (plain Markdown/JSON on the user’s filesystem) saves conversation history, user preferences, ongoing project state, custom instructions, file locations and configs so context survives across days/weeks.\n- Multi-channel integration (WhatsApp, Telegram, Discord, Slack, Signal, iMessage, Teams, Matrix, WebChat, native apps, etc.) lets users access that same, persistent agent state from any device or interface they already use.\n\nWhat that enables for users\n- Stateful continuity: start a task on one channel/device and continue later on another without re-explaining context (e.g., begin a website on desktop and finish via Telegram on your phone).\n- Personalization that persists: Moltbot remembers working patterns, custom instructions and project state so responses and actions are increasingly tailored over time.\n- Real automation across channels: because Moltbot can execute actions (browser automation via a managed Chromium/CDP, cron jobs, mailbox reorganization, API calls, etc.), users get end-to-end task execution rather than just suggestions — invoked from any channel.\n- Proactive, timely help: with saved context and multi-channel reach it can send reminders, heartbeats, daily briefings, monitor systems and push alerts wherever you are.\n- Extensible capabilities everywhere: community skills (ClawdHub) become usable from any connected channel, so new automations are immediately available across devices.\n\nPractical result\n- The interaction model shifts from “ask a question, get an isolated answer” to “engage an ongoing assistant that knows your projects, preferences and history and can act proactively or when asked, from any interface.”\n\nCaveat (security/attack surface)\n- Because memory and credentials are stored locally (often plaintext) and Moltbot accepts input over many messaging channels, this combined design also widens attack surfaces (prompt injection, credential exposure, backdoor risk) — something to mitigate with secure storage and channel filtering.",
+      "success": true,
+      "metrics": [
+        {
+          "name": "Contextual Precision",
+          "score": 1.0,
+          "passed": true,
+          "evaluation_cost": 0.0067945,
+          "reason": "The score is 1.00 because all top-ranked nodes consistently document both capabilities: node 1 explicitly lists \"Supported Channels: WhatsApp (via Baileys protocol), Telegram, Discord, Slack, Signal,...\" and \"Moltbot maintains long-term memory across sessions using local file storage\"; node 2 enumerates memory items like \"Previous conversations and interaction history\"; node 4 shows \"Persistent memory ✓\" and \"Multi-channel ✓\"; and node 10 states it \"transforms the interaction model from stateless question-answering to stateful collaboration.\" Irrelevant nodes do not appear above these relevant nodes, so nothing lowers the precision — hence the perfect score."
+        },
+        {
+          "name": "Contextual Recall",
+          "score": 1.0,
+          "passed": true,
+          "evaluation_cost": 0.0065575,
+          "reason": "The score is 1.00 because node(s) in retrieval context 1 and 2 explicitly state that Moltbot persists long‑term memory locally and enumerate the items in sentence 1 (previous conversations, user preferences, ongoing project context, custom instructions, file/system configurations), node 9 reinforces that all data persists locally; node 1 also verbatim describes the change from stateless question‑answering to stateful collaboration (sentence 2) and lists supported channels (WhatsApp, Telegram, Discord, Slack, Signal, macOS/iOS/Android) while linking multi‑channel access to retained context and multi‑day persistence (sentences 3–4), so each sentence in the expected output is directly supported by those nodes."
+        },
+        {
+          "name": "Contextual Relevancy",
+          "score": 0.9236641221374046,
+          "passed": true,
+          "evaluation_cost": 0.0445545,
+          "reason": "The score is 0.92 because the context includes multiple directly relevant passages — e.g., 'Moltbot integrates natively with messaging platforms users already employ daily (supported channels include WhatsApp (via Baileys protocol), Telegram, Discord, Slack, Signal, iMessage, Microsoft Teams, Matrix, WebChat, macOS/iOS/Android apps).', 'Moltbot maintains long-term memory across sessions using local file storage, enabling context retention that spans days or weeks.', and 'This persistent memory transforms the interaction model from stateless question-answering to stateful collaboration.' — which explain how multi-channel integration + persistent memory make interactions device‑agnostic, stateful, and proactive. It isn’t a perfect 1.0 because the retrieval also contains unrelated fragments that dilute focus, such as '8.3 Supply Chain Attack Risks', 'Open-source ✓', 'Cost API only', and 'opened a pull request while I was at the hairdresser.'."
+        },
+        {
+          "name": "Answer Relevancy",
+          "score": 1.0,
+          "passed": true,
+          "evaluation_cost": 0.0077677499999999995,
+          "reason": "The score is 1.00 because the output was fully on-topic and addressed how Moltbot’s persistent memory and multi-channel integration interact to change user interaction; there were no irrelevant statements. It can’t be higher because 1.00 is the maximum possible score."
+        },
+        {
+          "name": "Faithfulness",
+          "score": 1.0,
+          "passed": true,
+          "evaluation_cost": 0.012263,
+          "reason": "The score is 1.00 because there are no contradictions in the provided list, indicating the actual output fully aligns with the retrieval context — nice work!"
+        }
+      ]
+    },
+    {
+      "input": "What was Moltbot's total revenue in 2025?",
+      "category": "security",
+      "actual_output": "I wasn't able to find relevant information in the uploaded papers to answer your question. You may want to rephrase your question or upload additional papers.",
+      "success": false,
+      "metrics": [
+        {
+          "name": "Contextual Precision",
+          "score": 1.0,
+          "passed": true,
+          "evaluation_cost": 0.008373499999999999,
+          "reason": "The score is 1.00 because the top-ranked retrieval nodes consistently focus on adoption and evaluation rather than revenue—for example, first node: 'achieving over 103,000 stars within three months of launch'; second node: 'Moltbot delivers on its promise of proactive, autonomous AI assistance'; third node: 'Rebranded to Moltbot'; fourth node: 'Moltbot Hits 103000 GitHub Stars'—so there are no irrelevant nodes placed above these relevant ones. It can’t be higher than 1.00 (the maximum), and the upbeat takeaway is that the ranking correctly prioritizes adoption- and citation-focused content over unrelated material."
+        },
+        {
+          "name": "Contextual Recall",
+          "score": 1.0,
+          "passed": true,
+          "evaluation_cost": 0.006751999999999999,
+          "reason": "The score is 1.00 because node(s) in retrieval context (node 1) explicitly present adoption metrics (e.g., “achieving over 103,000 stars”) and contain no revenue figures, which directly supports sentence 1 and the adoption/GitHub-stars portion of sentence 2; node 1 does not state an MIT license or explicit “cost of running” details, but that omission does not contradict the main conclusion in sentence 3 that revenue information is not available."
+        },
+        {
+          "name": "Contextual Relevancy",
+          "score": 0.0,
+          "passed": false,
+          "evaluation_cost": 0.015982749999999997,
+          "reason": "The score is 0.00 because the retrieval context contains no 2025 financial figures: all cited items are non‑financial (e.g., \"Report Date: January 31, 2026\", \"achieving over 103,000 stars within three months of launch\", \"Rebranded to Moltbot\", \"Nov 24, 2025 launch as Clawdbot\", \"substantial security concerns, trademark disputes, and deployment complexities\") and the provided relevant-statements list is empty (\"[]\")."
+        },
+        {
+          "name": "Answer Relevancy",
+          "score": 1.0,
+          "passed": true,
+          "evaluation_cost": 0.002244,
+          "reason": "The score is 1.00 because the output contained no irrelevant statements and stayed fully on-topic for the question. It can't be higher because 1.00 is the maximum possible score."
+        },
+        {
+          "name": "Faithfulness",
+          "score": 0.6666666666666666,
+          "passed": false,
+          "evaluation_cost": 0.007512,
+          "reason": "The score is 0.67 because the retrieval context includes a detailed report on Moltbot (naming history, capabilities, timeline, security concerns, adoption metrics, and external references), so the actual output’s claim that no relevant information was found in the uploaded papers is contradicted by that report."
+        }
+      ]
+    },
+    {
+      "input": "What is the main security concern with how Moltbot stores sensitive data such as API keys?",
+      "category": "unanswerable",
+      "actual_output": "That Moltbot writes API keys and other credentials in plaintext JSON/Markdown files (e.g., under ~/.moltbot/) with no encryption at rest or directory sandboxing—so any process or attacker with read access to the host can trivially extract all secrets.",
+      "success": true,
+      "metrics": [
+        {
+          "name": "Contextual Precision",
+          "score": 1.0,
+          "passed": true,
+          "evaluation_cost": 0.006484,
+          "reason": "The score is 1.00 because every top-ranked node in the retrieval contexts consistently and explicitly documents plaintext credential storage and lack of encryption (node 1: 'Plaintext Storage: Moltbot stores sensitive credentials in plaintext JSON and Markdown files within ~/.moltbot/ directory structure' and 'No Encryption at Rest'; node 2: 'All data persists locally on the user's filesystem using plaintext Markdown and JSON files' and 'API keys and credentials (plaintext—security concern)'; node 3: 'Plaintext Credential Storage: API keys, passwords, and authentication tokens are stored in plaintext Markdown and JSON files on local filesystem'), so there are no irrelevant nodes outranking the relevant ones — excellent alignment."
+        },
+        {
+          "name": "Contextual Recall",
+          "score": 1.0,
+          "passed": true,
+          "evaluation_cost": 0.010735499999999999,
+          "reason": "The score is 1.00 because the expected output is directly reflected in node(s) in retrieval context: sentence 1 (all data persists locally in plaintext Markdown/JSON, including API keys) is explicitly stated in node 2 and echoed in node 3; sentence 2 (configuration in ~/.moltbot/config/ with session histories and logs) is in node 2 (and repeated in node 7); sentence 3 (no encryption at rest so anyone with filesystem/VPS/malware access can read credentials, a significant security concern) is corroborated by node 1 and node 2. No contradictions or missing elements were found, so the retrieval fully supports the output — nicely aligned."
+        },
+        {
+          "name": "Contextual Relevancy",
+          "score": 0.7431192660550459,
+          "passed": true,
+          "evaluation_cost": 0.03754075,
+          "reason": "The score is 0.74 because the context contains direct, highly relevant evidence about credential handling—e.g., \"Plaintext Storage: Moltbot stores sensitive credentials in plaintext JSON and Markdown files within ~/.moltbot/ directory structure\" and \"No Encryption at Rest: Moltbot implements no encryption for stored credentials\"—but it is diluted by unrelated operational details such as \"Moltbot includes a dedicated 'clawd-managed' Chrome/Chromium instance with Chrome DevTools Protocol (CDP) control for advanced web automation\" and \"WebSocket Control Plane: Handles real-time communication between components\", reducing overall relevancy."
+        },
+        {
+          "name": "Answer Relevancy",
+          "score": 1.0,
+          "passed": true,
+          "evaluation_cost": 0.0022212499999999997,
+          "reason": "The score is 1.00 because the response remained fully focused on the main security concern (how Moltbot stores API keys) with no irrelevant statements to list. It cannot be higher because 1.00 is the maximum possible score."
+        },
+        {
+          "name": "Faithfulness",
+          "score": 1.0,
+          "passed": true,
+          "evaluation_cost": 0.008510499999999999,
+          "reason": "The score is 1.00 because there are no contradictions—the contradictions list is empty—so the actual output fully aligns with the retrieval context. Nicely done!"
+        }
+      ]
+    }
+  ],
+  "run_metrics": [
+    {
+      "timestamp": "2026-08-15T08:35:35.029517+00:00",
+      "source": "deepeval_app_run",
+      "session_id_hash": "34316861136622915",
+      "route": "retrieve",
+      "retrieval_attempts": 2,
+      "rewrite_count": 0,
+      "retrieved_document_count": 8,
+      "latency_seconds": 20.5616,
+      "models": [
+        "gpt-5-mini-2025-08-07"
+      ],
+      "model_usage": {
+        "gpt-5-mini-2025-08-07": {
+          "input_tokens": 3507,
+          "input_token_details": {
+            "cache_read": 0,
+            "audio": 0
+          },
+          "output_token_details": {
+            "reasoning": 1088,
+            "audio": 0
+          },
+          "total_tokens": 4926,
+          "output_tokens": 1419
+        }
+      },
+      "input_tokens": 3507,
+      "output_tokens": 1419,
+      "total_tokens": 4926,
+      "usage_available": true,
+      "estimated_cost_usd": 0.00371475
+    },
+    {
+      "timestamp": "2026-08-15T08:36:42.455789+00:00",
+      "source": "deepeval_app_run",
+      "session_id_hash": "3615363645368563005",
+      "route": "retrieve",
+      "retrieval_attempts": 2,
+      "rewrite_count": 0,
+      "retrieved_document_count": 8,
+      "latency_seconds": 31.3805,
+      "models": [
+        "gpt-5-mini-2025-08-07"
+      ],
+      "model_usage": {
+        "gpt-5-mini-2025-08-07": {
+          "input_tokens": 3540,
+          "input_token_details": {
+            "cache_read": 0,
+            "audio": 0
+          },
+          "output_token_details": {
+            "reasoning": 1408,
+            "audio": 0
+          },
+          "total_tokens": 5353,
+          "output_tokens": 1813
+        }
+      },
+      "input_tokens": 3540,
+      "output_tokens": 1813,
+      "total_tokens": 5353,
+      "usage_available": true,
+      "estimated_cost_usd": 0.004511
+    },
+    {
+      "timestamp": "2026-08-15T08:37:33.460902+00:00",
+      "source": "deepeval_app_run",
+      "session_id_hash": "4405176428185744237",
+      "route": "retrieve",
+      "retrieval_attempts": 3,
+      "rewrite_count": 0,
+      "retrieved_document_count": 12,
+      "latency_seconds": 40.5783,
+      "models": [
+        "gpt-5-mini-2025-08-07"
+      ],
+      "model_usage": {
+        "gpt-5-mini-2025-08-07": {
+          "input_tokens": 4431,
+          "input_token_details": {
+            "cache_read": 0,
+            "audio": 0
+          },
+          "output_token_details": {
+            "reasoning": 1344,
+            "audio": 0
+          },
+          "total_tokens": 6401,
+          "output_tokens": 1970
+        }
+      },
+      "input_tokens": 4431,
+      "output_tokens": 1970,
+      "total_tokens": 6401,
+      "usage_available": true,
+      "estimated_cost_usd": 0.00504775
+    },
+    {
+      "timestamp": "2026-08-15T08:38:27.401518+00:00",
+      "source": "deepeval_app_run",
+      "session_id_hash": "-762226269129257716",
+      "route": "retrieve",
+      "retrieval_attempts": 3,
+      "rewrite_count": 0,
+      "retrieved_document_count": 12,
+      "latency_seconds": 38.8976,
+      "models": [
+        "gpt-5-mini-2025-08-07"
+      ],
+      "model_usage": {
+        "gpt-5-mini-2025-08-07": {
+          "input_tokens": 4290,
+          "input_token_details": {
+            "cache_read": 0,
+            "audio": 0
+          },
+          "output_token_details": {
+            "reasoning": 1984,
+            "audio": 0
+          },
+          "total_tokens": 6556,
+          "output_tokens": 2266
+        }
+      },
+      "input_tokens": 4290,
+      "output_tokens": 2266,
+      "total_tokens": 6556,
+      "usage_available": true,
+      "estimated_cost_usd": 0.0056045
+    },
+    {
+      "timestamp": "2026-08-15T08:39:27.099247+00:00",
+      "source": "deepeval_app_run",
+      "session_id_hash": "-7487017434000959678",
+      "route": "retrieve",
+      "retrieval_attempts": 1,
+      "rewrite_count": 1,
+      "retrieved_document_count": 4,
+      "latency_seconds": 45.4049,
+      "models": [
+        "gpt-5-mini-2025-08-07"
+      ],
+      "model_usage": {
+        "gpt-5-mini-2025-08-07": {
+          "input_tokens": 4175,
+          "output_token_details": {
+            "reasoning": 1856,
+            "audio": 0
+          },
+          "input_token_details": {
+            "cache_read": 0,
+            "audio": 0
+          },
+          "total_tokens": 6594,
+          "output_tokens": 2419
+        }
+      },
+      "input_tokens": 4175,
+      "output_tokens": 2419,
+      "total_tokens": 6594,
+      "usage_available": true,
+      "estimated_cost_usd": 0.00588175
+    }
+  ]
+}
