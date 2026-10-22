@@ -1,0 +1,2247 @@
+{
+  "schema_version": 2,
+  "status": "complete",
+  "experiment": {
+    "label": "rag_all_metrics_x1",
+    "goldens_source": "all",
+    "judge_model": "gpt-6-luna",
+    "application_model": "gpt-6-luna",
+    "embedding_model": "text-embedding-3-small",
+    "retrieval_mode": "hybrid",
+    "rerank_enabled": true,
+    "retrieval_candidate_k": 20,
+    "rerank_top_n": 4,
+    "case_count": 17,
+    "case_start": 0,
+    "case_runs_completed": 17,
+    "metric_threshold": 0.7,
+    "judge_cost_usd": 0.066882,
+    "app_cost_usd": 0.007009,
+    "total_cost_usd": 0.073891,
+    "avg_retrieved_chunks": 6.18,
+    "avg_unique_chunks": 6.18,
+    "avg_latency_seconds": 10.69,
+    "web_tool_calls": 0
+  },
+  "metadata": {
+    "git": {
+      "sha": "0e654d2881d96adb0753d29ff11b9f2926209f7b",
+      "dirty": false,
+      "branch": "main",
+      "changed_files": []
+    },
+    "started_utc": "2026-10-21T18:01:19+00:00",
+    "ended_utc": "2026-10-21T18:13:13+00:00",
+    "versions": {
+      "python": "3.12.10",
+      "deepeval": "4.0.0",
+      "langchain-openai": "1.2.1",
+      "langchain-core": "1.3.3",
+      "langgraph": "1.1.10",
+      "openai": "2.36.0",
+      "qdrant-client": "1.17.1",
+      "fastembed": "0.8.0"
+    },
+    "command": "python evaluate.py --goldens all --metrics faithfulness,answer_relevancy,contextual_precision,contextual_recall,contextual_relevancy --runs 1 --label rag_all_metrics_x1 --budget-usd 0.9166 --output results/rag_all_metrics_x1_20261021T173222Z.json",
+    "argv": [
+      "--goldens",
+      "all",
+      "--metrics",
+      "faithfulness,answer_relevancy,contextual_precision,contextual_recall,contextual_relevancy",
+      "--runs",
+      "1",
+      "--label",
+      "rag_all_metrics_x1",
+      "--budget-usd",
+      "0.9166",
+      "--output",
+      "results/rag_all_metrics_x1_20261021T173222Z.json"
+    ],
+    "output": "results/rag_all_metrics_x1_20261021T173222Z.json",
+    "app_model_alias": "gpt-6-luna",
+    "app_resolved_model_ids": [
+      "gpt-6-luna"
+    ],
+    "judge": {
+      "model": "gpt-6-luna",
+      "registry": "registered-by-evaluate.py",
+      "input_price_per_token": 1.0000000000000001e-07,
+      "output_price_per_token": 5e-07,
+      "supports_log_probs": false,
+      "supports_multimodal": false,
+      "supports_structured_outputs": true,
+      "supports_json": false,
+      "supports_temperature": false,
+      "reasoning_effort": "low"
+    },
+    "judge_resolved_model_ids": [
+      "gpt-6-luna"
+    ],
+    "embedding_model": "text-embedding-3-small",
+    "settings": {
+      "retrieval_mode": "hybrid",
+      "rerank_enabled": true,
+      "retrieval_candidate_k": 20,
+      "rerank_top_n": 4,
+      "sparse_embedding_model": "Qdrant/bm25",
+      "rerank_model": "Xenova/ms-marco-MiniLM-L-6-v2",
+      "max_retrieval_attempts": 3,
+      "max_query_rewrites": 1,
+      "max_history_turns": 3,
+      "graph_recursion_limit": 0,
+      "openai_reasoning_effort": "none",
+      "answer_reasoning_effort": "none",
+      "llm_max_output_tokens": 2048,
+      "llm_timeout_seconds": 60,
+      "llm_max_retries": 2,
+      "tavily_max_results": 3,
+      "tavily_search_depth": "basic",
+      "qdrant_target": "local"
+    },
+    "paper_only": true,
+    "goldens": {
+      "source": "all",
+      "files": [
+        {
+          "set": "synthetic",
+          "path": "goldens.json",
+          "sha256": "624153833c4a73aaa8daba9f8e13eea1363da2b3ac0dc10c3253c8b4c44ab005",
+          "n": 10
+        },
+        {
+          "set": "curated",
+          "path": "goldens_curated.json",
+          "sha256": "6f4fa77f7624522336b4355e27adb2f494659395edfc6a40f28220f073e55264",
+          "n": 7
+        }
+      ],
+      "n_selected": 17
+    },
+    "metrics": [
+      "faithfulness",
+      "answer_relevancy",
+      "contextual_precision",
+      "contextual_recall",
+      "contextual_relevancy"
+    ],
+    "metric_thresholds": {
+      "Faithfulness": 0.7,
+      "Answer Relevancy": 0.7,
+      "Contextual Precision": 0.7,
+      "Contextual Recall": 0.7,
+      "Contextual Relevancy": 0.7
+    },
+    "runs_requested": 1,
+    "document": "documents/Openclaw_Research_Report.pdf"
+  },
+  "budget": {
+    "budget_usd": 0.9166,
+    "spent_usd": 0.073891,
+    "remaining_usd": 0.842709,
+    "prior_case_estimate_usd": 0.06708,
+    "max_measured_case_usd": 0.005824,
+    "cases_measured": 17,
+    "truncated": false,
+    "stop_reason": null
+  },
+  "judge_usage": {
+    "totals": {
+      "calls": 309,
+      "input_tokens": 265585,
+      "cached_input_tokens": 2456,
+      "output_tokens": 80647,
+      "reasoning_tokens": 16575
+    },
+    "by_metric": {
+      "answer_relevancy": {
+        "calls": 51,
+        "input_tokens": 21880,
+        "cached_input_tokens": 0,
+        "output_tokens": 5256,
+        "reasoning_tokens": 465,
+        "cost_usd": 0.004816,
+        "model_ids": [
+          "gpt-6-luna"
+        ]
+      },
+      "contextual_recall": {
+        "calls": 34,
+        "input_tokens": 42692,
+        "cached_input_tokens": 0,
+        "output_tokens": 7900,
+        "reasoning_tokens": 2657,
+        "cost_usd": 0.008219,
+        "model_ids": [
+          "gpt-6-luna"
+        ]
+      },
+      "contextual_precision": {
+        "calls": 34,
+        "input_tokens": 45085,
+        "cached_input_tokens": 0,
+        "output_tokens": 7671,
+        "reasoning_tokens": 1111,
+        "cost_usd": 0.008344,
+        "model_ids": [
+          "gpt-6-luna"
+        ]
+      },
+      "contextual_relevancy": {
+        "calls": 122,
+        "input_tokens": 97797,
+        "cached_input_tokens": 0,
+        "output_tokens": 44219,
+        "reasoning_tokens": 10791,
+        "cost_usd": 0.031889,
+        "model_ids": [
+          "gpt-6-luna"
+        ]
+      },
+      "faithfulness": {
+        "calls": 68,
+        "input_tokens": 58131,
+        "cached_input_tokens": 2456,
+        "output_tokens": 15601,
+        "reasoning_tokens": 1551,
+        "cost_usd": 0.013614,
+        "model_ids": [
+          "gpt-6-luna"
+        ]
+      }
+    },
+    "ledger_cost_usd": 0.066882
+  },
+  "aggregate": {
+    "Faithfulness": {
+      "mean": 0.9926,
+      "avg_score": 0.9926,
+      "per_run_means": [
+        0.9926
+      ],
+      "run_mean_std": null,
+      "pass_rate": 1.0,
+      "passed": 17,
+      "n": 17,
+      "n_cases": 17,
+      "runs": 1,
+      "unscored": 0,
+      "ci95": [
+        0.9779,
+        1.0
+      ],
+      "ci95_method": "case-level percentile bootstrap, 10000 resamples, seed 12345"
+    },
+    "Answer Relevancy": {
+      "mean": 1.0,
+      "avg_score": 1.0,
+      "per_run_means": [
+        1.0
+      ],
+      "run_mean_std": null,
+      "pass_rate": 1.0,
+      "passed": 17,
+      "n": 17,
+      "n_cases": 17,
+      "runs": 1,
+      "unscored": 0,
+      "ci95": [
+        1.0,
+        1.0
+      ],
+      "ci95_method": "case-level percentile bootstrap, 10000 resamples, seed 12345"
+    },
+    "Contextual Precision": {
+      "mean": 0.964,
+      "avg_score": 0.964,
+      "per_run_means": [
+        0.964
+      ],
+      "run_mean_std": null,
+      "pass_rate": 1.0,
+      "passed": 17,
+      "n": 17,
+      "n_cases": 17,
+      "runs": 1,
+      "unscored": 0,
+      "ci95": [
+        0.9305,
+        0.9904
+      ],
+      "ci95_method": "case-level percentile bootstrap, 10000 resamples, seed 12345"
+    },
+    "Contextual Recall": {
+      "mean": 0.9374,
+      "avg_score": 0.9374,
+      "per_run_means": [
+        0.9374
+      ],
+      "run_mean_std": null,
+      "pass_rate": 0.9412,
+      "passed": 16,
+      "n": 17,
+      "n_cases": 17,
+      "runs": 1,
+      "unscored": 0,
+      "ci95": [
+        0.8667,
+        0.991
+      ],
+      "ci95_method": "case-level percentile bootstrap, 10000 resamples, seed 12345"
+    },
+    "Contextual Relevancy": {
+      "mean": 0.533,
+      "avg_score": 0.533,
+      "per_run_means": [
+        0.533
+      ],
+      "run_mean_std": null,
+      "pass_rate": 0.3529,
+      "passed": 6,
+      "n": 17,
+      "n_cases": 17,
+      "runs": 1,
+      "unscored": 0,
+      "ci95": [
+        0.4111,
+        0.6501
+      ],
+      "ci95_method": "case-level percentile bootstrap, 10000 resamples, seed 12345"
+    }
+  },
+  "runs": [
+    {
+      "run_index": 0,
+      "case_runs_judged": 17,
+      "per_metric_mean": {
+        "Faithfulness": 0.9926,
+        "Answer Relevancy": 1.0,
+        "Contextual Precision": 0.964,
+        "Contextual Recall": 0.9374,
+        "Contextual Relevancy": 0.533
+      }
+    }
+  ],
+  "tests": [
+    {
+      "run_index": 0,
+      "case_id": "synthetic:0",
+      "golden_set": "synthetic",
+      "category": null,
+      "input": "How do Moltbot's native 9+ channels and device-agnostic access improve everyday AI usability?",
+      "expected_output": "Moltbot improves everyday AI usability by letting people interact through messaging apps they already use—like WhatsApp, Telegram, Discord, Slack, Signal, iMessage, Teams, Matrix, WebChat, and mobile/desktop apps—instead of requiring a separate proprietary interface. This device-agnostic, multi-channel setup means users can access the same assistant from anywhere, on any device, with familiar workflows.\n\nBecause Moltbot also keeps persistent memory across sessions, the experience feels continuous rather than reset each time. In practice, this makes AI more convenient for real work—for example, one user reportedly built an entire website from a phone via Telegram.",
+      "session_id": "evaluation_session_d107ca06-7234-493f-b165-607433126f9e",
+      "latency_seconds": 13.498,
+      "app": {
+        "resolved_model_ids": [
+          "gpt-6-luna"
+        ],
+        "per_model": {
+          "gpt-6-luna": {
+            "input_tokens": 2522,
+            "cached_input_tokens": 0,
+            "output_tokens": 291,
+            "reasoning_tokens": 0,
+            "cost_usd": 0.0003977
+          }
+        },
+        "input_tokens": 2522,
+        "cached_input_tokens": 0,
+        "output_tokens": 291,
+        "reasoning_tokens": 0,
+        "cost_usd": 0.0003977,
+        "record_run_estimated_cost_usd": 0.0003977
+      },
+      "actual_output": "Moltbot lets users reach the assistant through messaging platforms they already use—such as WhatsApp, Telegram, Discord, Slack, Signal, iMessage, and Teams—rather than requiring a separate proprietary interface. Because it works across devices, users can interact from familiar apps wherever they are. The context describes this as making access more flexible and convenient, including an example of someone building an entire website from a phone via Telegram.",
+      "trace": {
+        "route": "retrieve",
+        "tool_calls": {
+          "vectorstore": 1,
+          "web": 0,
+          "other": 0
+        },
+        "retrieved_doc_sources": {
+          "paper": 5,
+          "web": 0
+        },
+        "retrieved_count": 5,
+        "unique_chunk_count": 5,
+        "retrieval_attempts": 1,
+        "rewrite_count": 0,
+        "retrieval_context_sha256": "a8bc78009b8db445f638bd7d6f86d62716d0810b8a3c6e238ab70a17938cbed5"
+      },
+      "judge": {
+        "ledger_cost_usd": 0.0033669,
+        "cost_usd": 0.0033669,
+        "metric_cost_usd": 0.0033669,
+        "by_metric": {
+          "Faithfulness": 0.0007455999999999999,
+          "Answer Relevancy": 0.0002401,
+          "Contextual Precision": 0.00042740000000000003,
+          "Contextual Recall": 0.0003082,
+          "Contextual Relevancy": 0.0016455999999999999
+        }
+      },
+      "success": false,
+      "metrics": [
+        {
+          "name": "Faithfulness",
+          "score": 1.0,
+          "passed": true,
+          "threshold": 0.7,
+          "evaluation_cost": 0.0007455999999999999,
+          "evaluation_model": "gpt-6-luna",
+          "reason": "The score is 1.00 because there are no contradictions; the actual output is fully consistent with the retrieval context.",
+          "error": null
+        },
+        {
+          "name": "Answer Relevancy",
+          "score": 1.0,
+          "passed": true,
+          "threshold": 0.7,
+          "evaluation_cost": 0.0002401,
+          "evaluation_model": "gpt-6-luna",
+          "reason": "The score is 1.00 because there are no irrelevant statements, and the response directly addresses how broad channel support and device-agnostic access make AI easier to use in everyday situations.",
+          "error": null
+        },
+        {
+          "name": "Contextual Precision",
+          "score": 1.0,
+          "passed": true,
+          "threshold": 0.7,
+          "evaluation_cost": 0.00042740000000000003,
+          "evaluation_model": "gpt-6-luna",
+          "reason": "The score is 1.00 because the relevant nodes in the retrieval contexts are ranked first and second: the first explains access “from any device, anywhere” through “familiar interfaces,” while the second highlights “9+ messaging platforms simultaneously” and avoiding new interfaces. The irrelevant nodes are ranked third through fifth and focus on competitors, architecture, and browser automation rather than everyday usability, so they do not outrank the relevant nodes.",
+          "error": null
+        },
+        {
+          "name": "Contextual Recall",
+          "score": 1.0,
+          "passed": true,
+          "threshold": 0.7,
+          "evaluation_cost": 0.0003082,
+          "evaluation_model": "gpt-6-luna",
+          "reason": "The score is 1.00 because both sentences are supported by node 1 in retrieval context: it lists the messaging platforms and access from any device or anywhere (sentence 1), and describes persistent memory and building a website from a phone via Telegram (sentence 2).",
+          "error": null
+        },
+        {
+          "name": "Contextual Relevancy",
+          "score": 0.53125,
+          "passed": false,
+          "threshold": 0.7,
+          "evaluation_cost": 0.0016455999999999999,
+          "evaluation_model": "gpt-6-luna",
+          "reason": "The score is 0.53 because the context directly explains that Moltbot works through familiar platforms people use daily, supports 9+ channels, and is accessible “from any device, anywhere,” improving convenience without requiring users to learn a new interface. However, much of the context is unrelated, covering memory, automation, integrations, and system architecture rather than everyday usability.",
+          "error": null
+        }
+      ]
+    },
+    {
+      "run_index": 0,
+      "case_id": "synthetic:1",
+      "golden_set": "synthetic",
+      "category": null,
+      "input": "List Moltbot's cross-session memory types and infer how they enable stateful collaboration.",
+      "expected_output": "Moltbot's cross-session memory includes:\n\n- Previous conversations and interaction history\n- User preferences and working patterns\n- Ongoing project context and state\n- Custom instructions and behavioral guidelines\n- File locations and system configurations\n\nThese memory types let Moltbot retain context across days or weeks, so it can continue work without starting over each session. This enables stateful collaboration by helping it remember what you're doing, how you like to work, and what systems or files are involved.",
+      "session_id": "evaluation_session_ec4b5817-22b0-4898-a8f6-c270c229f20f",
+      "latency_seconds": 9.875,
+      "app": {
+        "resolved_model_ids": [
+          "gpt-6-luna"
+        ],
+        "per_model": {
+          "gpt-6-luna": {
+            "input_tokens": 2525,
+            "cached_input_tokens": 0,
+            "output_tokens": 205,
+            "reasoning_tokens": 0,
+            "cost_usd": 0.000355
+          }
+        },
+        "input_tokens": 2525,
+        "cached_input_tokens": 0,
+        "output_tokens": 205,
+        "reasoning_tokens": 0,
+        "cost_usd": 0.000355,
+        "record_run_estimated_cost_usd": 0.000355
+      },
+      "actual_output": "Moltbot’s cross-session memory includes:\n\n- Previous conversations and interaction history\n- User preferences and working patterns\n- Ongoing project context and state\n- Custom instructions and behavioral guidelines\n- File locations and system configurations\n\nBecause this information persists in local files, Moltbot can carry context from one session to the next, remember how a user works, and continue ongoing projects without requiring the user to restate everything. That supports stateful collaboration rather than one-off, stateless question-answering.",
+      "trace": {
+        "route": "retrieve",
+        "tool_calls": {
+          "vectorstore": 1,
+          "web": 0,
+          "other": 0
+        },
+        "retrieved_doc_sources": {
+          "paper": 5,
+          "web": 0
+        },
+        "retrieved_count": 5,
+        "unique_chunk_count": 5,
+        "retrieval_attempts": 1,
+        "rewrite_count": 0,
+        "retrieval_context_sha256": "e2928e12da0629bf768ee6918a2db38243a3ce45d6e96adb6ee0f8612f089527"
+      },
+      "judge": {
+        "ledger_cost_usd": 0.0036003,
+        "cost_usd": 0.0036003,
+        "metric_cost_usd": 0.0036003,
+        "by_metric": {
+          "Faithfulness": 0.0007776,
+          "Answer Relevancy": 0.0002879,
+          "Contextual Precision": 0.0004182,
+          "Contextual Recall": 0.00043650000000000004,
+          "Contextual Relevancy": 0.0016801
+        }
+      },
+      "success": false,
+      "metrics": [
+        {
+          "name": "Faithfulness",
+          "score": 1.0,
+          "passed": true,
+          "threshold": 0.7,
+          "evaluation_cost": 0.0007776,
+          "evaluation_model": "gpt-6-luna",
+          "reason": "The score is 1.00 because there are no contradictions; the actual output is fully consistent with the retrieval context.",
+          "error": null
+        },
+        {
+          "name": "Answer Relevancy",
+          "score": 1.0,
+          "passed": true,
+          "threshold": 0.7,
+          "evaluation_cost": 0.0002879,
+          "evaluation_model": "gpt-6-luna",
+          "reason": "The score is 1.00 because the response directly addresses the requested memory types and how they support stateful collaboration, with no irrelevant statements.",
+          "error": null
+        },
+        {
+          "name": "Contextual Precision",
+          "score": 0.9166666666666666,
+          "passed": true,
+          "threshold": 0.7,
+          "evaluation_cost": 0.0004182,
+          "evaluation_model": "gpt-6-luna",
+          "reason": "The score is 0.92 because the first two nodes in the retrieval contexts are highly relevant: the first explains memory “spans days or weeks” and supports “stateful collaboration,” while the second directly lists the memory types. The third node is irrelevant because it discusses second-brain use without the requested types or collaboration link, and the fifth node is less useful because it only says “Persistent memory” without details; both should rank below the relevant fourth node, which supports continuity with “Session histories and conversation logs” and maintained “context and history.”",
+          "error": null
+        },
+        {
+          "name": "Contextual Recall",
+          "score": 1.0,
+          "passed": true,
+          "threshold": 0.7,
+          "evaluation_cost": 0.00043650000000000004,
+          "evaluation_model": "gpt-6-luna",
+          "reason": "The score is 1.00 because nodes 1 and 2 in retrieval context support the cross-session memory description, and node 2 explicitly covers every listed memory type and the explanation of how these memories enable ongoing collaboration. Great coverage!",
+          "error": null
+        },
+        {
+          "name": "Contextual Relevancy",
+          "score": 0.4074074074074074,
+          "passed": false,
+          "threshold": 0.7,
+          "evaluation_cost": 0.0016801,
+          "evaluation_model": "gpt-6-luna",
+          "reason": "The score is 0.41 because much of the context is unrelated—such as messaging integrations, browser automation, and skill execution—but relevant statements identify persistent memory across sessions and its types: “previous conversations,” “user preferences,” “ongoing project context and state,” and “custom instructions.” These support the inference that retained context helps Moltbot collaborate consistently over time.",
+          "error": null
+        }
+      ]
+    },
+    {
+      "run_index": 0,
+      "case_id": "synthetic:2",
+      "golden_set": "synthetic",
+      "category": null,
+      "input": "Which LLM backends does Moltbot support, and how can users switch providers seamlessly?",
+      "expected_output": "Moltbot is model-agnostic and supports multiple LLM backends, including:\n\n- Anthropic Claude (Sonnet, Opus)\n- OpenAI GPT-4 and GPT-4 Turbo\n- Google Gemini\n- Local models via Ollama\n- Local models via LM Studio\n- AWS Bedrock\n\nUsers can switch between providers without reconfiguring the entire setup, making it easy to optimize for cost or capabilities as needed.",
+      "session_id": "evaluation_session_c18e7d52-981f-4bd5-b3fe-842cdf5000ff",
+      "latency_seconds": 11.477,
+      "app": {
+        "resolved_model_ids": [
+          "gpt-6-luna"
+        ],
+        "per_model": {
+          "gpt-6-luna": {
+            "input_tokens": 2414,
+            "cached_input_tokens": 0,
+            "output_tokens": 155,
+            "reasoning_tokens": 0,
+            "cost_usd": 0.0003189
+          }
+        },
+        "input_tokens": 2414,
+        "cached_input_tokens": 0,
+        "output_tokens": 155,
+        "reasoning_tokens": 0,
+        "cost_usd": 0.0003189,
+        "record_run_estimated_cost_usd": 0.0003189
+      },
+      "actual_output": "Moltbot supports Anthropic Claude (Sonnet and Opus), OpenAI GPT-4 and GPT-4 Turbo, Google Gemini, local models via Ollama or LM Studio, and AWS Bedrock. Users can switch between providers without reconfiguring the entire setup.",
+      "trace": {
+        "route": "retrieve",
+        "tool_calls": {
+          "vectorstore": 1,
+          "web": 0,
+          "other": 0
+        },
+        "retrieved_doc_sources": {
+          "paper": 5,
+          "web": 0
+        },
+        "retrieved_count": 5,
+        "unique_chunk_count": 5,
+        "retrieval_attempts": 1,
+        "rewrite_count": 0,
+        "retrieval_context_sha256": "2d3937fbde887d985517f65fa58f947b642ab6b6f36d0a7f9209033c08c5dd18"
+      },
+      "judge": {
+        "ledger_cost_usd": 0.0035056,
+        "cost_usd": 0.0035056,
+        "metric_cost_usd": 0.0035056,
+        "by_metric": {
+          "Faithfulness": 0.0007283000000000001,
+          "Answer Relevancy": 0.00023449999999999998,
+          "Contextual Precision": 0.0005067,
+          "Contextual Recall": 0.0004077,
+          "Contextual Relevancy": 0.0016284000000000001
+        }
+      },
+      "success": false,
+      "metrics": [
+        {
+          "name": "Faithfulness",
+          "score": 1.0,
+          "passed": true,
+          "threshold": 0.7,
+          "evaluation_cost": 0.0007283000000000001,
+          "evaluation_model": "gpt-6-luna",
+          "reason": "The score is 1.00 because there are no contradictions; the actual output is fully faithful to the retrieval context.",
+          "error": null
+        },
+        {
+          "name": "Answer Relevancy",
+          "score": 1.0,
+          "passed": true,
+          "threshold": 0.7,
+          "evaluation_cost": 0.00023449999999999998,
+          "evaluation_model": "gpt-6-luna",
+          "reason": "The score is 1.00 because there are no irrelevant statements; the response fully addresses which LLM backends Moltbot supports and how to switch providers seamlessly.",
+          "error": null
+        },
+        {
+          "name": "Contextual Precision",
+          "score": 1.0,
+          "passed": true,
+          "threshold": 0.7,
+          "evaluation_cost": 0.0005067,
+          "evaluation_model": "gpt-6-luna",
+          "reason": "The score is 1.00 because the relevant nodes in retrieval contexts rank first and second: the first directly lists backends and explains seamless switching, while the second adds context on model choice. The irrelevant nodes rank lower: the third discusses risks and “provides no information” about backends or switching, the fourth contains security warnings that “do not help identify” either, and the fifth compares tools but “does not address” the question. Great ranking overall!",
+          "error": null
+        },
+        {
+          "name": "Contextual Recall",
+          "score": 1.0,
+          "passed": true,
+          "threshold": 0.7,
+          "evaluation_cost": 0.0004077,
+          "evaluation_model": "gpt-6-luna",
+          "reason": "The score is 1.00 because node 1 in retrieval context supports every sentence in the expected output, including Moltbot’s model-agnostic design, all listed LLM providers, and switching providers to optimize cost or capabilities. Great coverage!",
+          "error": null
+        },
+        {
+          "name": "Contextual Relevancy",
+          "score": 0.16666666666666666,
+          "passed": false,
+          "threshold": 0.7,
+          "evaluation_cost": 0.0016284000000000001,
+          "evaluation_model": "gpt-6-luna",
+          "reason": "The score is 0.17 because most of the context concerns unrelated topics such as Gateway architecture, security, and pricing, but it does directly state that Moltbot supports Claude, GPT-4, Gemini, Ollama, LM Studio, and AWS Bedrock, and that users can switch providers without reconfiguring the entire setup.",
+          "error": null
+        }
+      ]
+    },
+    {
+      "run_index": 0,
+      "case_id": "synthetic:3",
+      "golden_set": "synthetic",
+      "category": null,
+      "input": "Compare local vs VPS Moltbot tradeoffs: privacy, latency, uptime, cost, security, hardware access.",
+      "expected_output": "**Local deployment**\n- **Privacy:** Best option. Data stays on user-controlled hardware with **zero cloud provider access**.\n- **Latency:** Lower latency for file operations and system commands since there are **no network round-trips**.\n- **Uptime:** Weaker than VPS; depends on home power, internet, and device uptime.\n- **Cost:** **No recurring hosting fees** after hardware purchase, aside from electricity.\n- **Security:** Better data sovereignty, but risks include **physical device security**, **malware**, and **home network breaches**.\n- **Hardware access:** Strong advantage—direct access to **local devices, USB peripherals, and internal network resources**.\n\n**VPS deployment**\n- **Privacy:** Weaker than local because the **VPS provider theoretically has access** to hosted data and credentials.\n- **Latency:** Typically higher for local file/system tasks because requests cross the network.\n- **Uptime:** Better for 24/7 use—data centers provide **redundant power/networking** and better reliability.\n- **Cost:** Ongoing monthly cost, typically **$5–24/month**, but can be cost-effective versus running dedicated hardware continuously.\n- **Security:** Exposed to **internet scanning/exploitation** and risks from **misconfigured reverse proxies**.\n- **Hardware access:** Limited; no direct access to your local USB devices or internal home/business network unless specially configured.\n\n**Bottom line**\n- Choose **local** for **maximum privacy, lower latency, and hardware access**.\n- Choose **VPS** for **always-on automation, remote access, and reliability**.\n- The context suggests a **hybrid approach** is often best: **VPS for automation**, **local for sensitive tasks**.",
+      "session_id": "evaluation_session_749438e0-9eb0-4b1f-b097-49af8ec80843",
+      "latency_seconds": 15.025,
+      "app": {
+        "resolved_model_ids": [
+          "gpt-6-luna"
+        ],
+        "per_model": {
+          "gpt-6-luna": {
+            "input_tokens": 3668,
+            "cached_input_tokens": 0,
+            "output_tokens": 456,
+            "reasoning_tokens": 0,
+            "cost_usd": 0.0005948
+          }
+        },
+        "input_tokens": 3668,
+        "cached_input_tokens": 0,
+        "output_tokens": 456,
+        "reasoning_tokens": 0,
+        "cost_usd": 0.0005948,
+        "record_run_estimated_cost_usd": 0.0005948
+      },
+      "actual_output": "| Tradeoff | Local deployment | VPS deployment |\n|---|---|---|\n| **Privacy** | Strongest privacy: data stays on user-controlled hardware, with no cloud-provider access. | Less suited to tasks requiring maximum privacy; the report recommends keeping sensitive tasks local. |\n| **Latency** | Lower latency for local file operations and system commands because there are no network round-trips. | Those operations may involve network round-trips. |\n| **Uptime** | Depends on the personal computer’s uptime and is more vulnerable to home power or internet outages. | Better for continuous, 24/7 operation, with data-center power and network redundancy. |\n| **Cost** | No recurring hosting fee after buying hardware, though electricity costs remain. | Typically **$5–24/month**; a low-cost VPS may be cheaper than running dedicated hardware continuously. |\n| **Security** | Gives the user control over the OS, security settings, and network access, but the user remains responsible for hardening and protecting the system. | Offers cloud reliability and remote access, but puts the instance on hosted infrastructure. The report emphasizes that security hardening remains important for self-hosted Moltbot. |\n| **Hardware access** | Direct access to local devices, USB peripherals, and internal network resources. | Does not have the same direct access to the user’s local hardware and network resources. |\n\nThe report suggests a **hybrid setup**: use a VPS for reliable automation and a local instance for sensitive tasks or tasks needing local-resource access.",
+      "trace": {
+        "route": "retrieve",
+        "tool_calls": {
+          "vectorstore": 2,
+          "web": 0,
+          "other": 0
+        },
+        "retrieved_doc_sources": {
+          "paper": 8,
+          "web": 0
+        },
+        "retrieved_count": 8,
+        "unique_chunk_count": 8,
+        "retrieval_attempts": 2,
+        "rewrite_count": 0,
+        "retrieval_context_sha256": "0e4b321ca548b104f060a62f555e2faa6675d2c0e92258a0ce132a9eac139d9d"
+      },
+      "judge": {
+        "ledger_cost_usd": 0.0052287,
+        "cost_usd": 0.0052287,
+        "metric_cost_usd": 0.0052287,
+        "by_metric": {
+          "Faithfulness": 0.0012342,
+          "Answer Relevancy": 0.0004584,
+          "Contextual Precision": 0.0006039999999999999,
+          "Contextual Recall": 0.0007293,
+          "Contextual Relevancy": 0.0022028
+        }
+      },
+      "success": true,
+      "metrics": [
+        {
+          "name": "Faithfulness",
+          "score": 1.0,
+          "passed": true,
+          "threshold": 0.7,
+          "evaluation_cost": 0.0012342,
+          "evaluation_model": "gpt-6-luna",
+          "reason": "The score is 1.00 because there are no contradictions, so the actual output is fully faithful to the retrieval context.",
+          "error": null
+        },
+        {
+          "name": "Answer Relevancy",
+          "score": 1.0,
+          "passed": true,
+          "threshold": 0.7,
+          "evaluation_cost": 0.0004584,
+          "evaluation_model": "gpt-6-luna",
+          "reason": "The score is 1.00 because no irrelevant statements were identified; the response fully addresses the requested Moltbot tradeoffs.",
+          "error": null
+        },
+        {
+          "name": "Contextual Precision",
+          "score": 1.0,
+          "passed": true,
+          "threshold": 0.7,
+          "evaluation_cost": 0.0006039999999999999,
+          "evaluation_model": "gpt-6-luna",
+          "reason": "The score is 1.00 because all retrieval-context nodes are relevant to comparing local and VPS Moltbot tradeoffs, and the most directly useful nodes rank highest: the first covers local privacy, cost, latency, and hardware access, while the second covers VPS uptime and cost. Later nodes add security, hybrid recommendations, and further cost and privacy details, so no irrelevant nodes are ranked above relevant ones. There is no reason for the score to be higher.",
+          "error": null
+        },
+        {
+          "name": "Contextual Recall",
+          "score": 0.7333333333333333,
+          "passed": true,
+          "threshold": 0.7,
+          "evaluation_cost": 0.0007293,
+          "evaluation_model": "gpt-6-luna",
+          "reason": "The score is 0.73 because node(s) in retrieval context 1–4 support most privacy, latency, uptime, cost, hardware-access, and recommendation claims in sentences 1–4 and the bottom line. However, sentence 5’s specific security risks, the VPS-provider access claim in sentence 9, and the local-device limitations in sentence 12 are not stated in the retrieval context.",
+          "error": null
+        },
+        {
+          "name": "Contextual Relevancy",
+          "score": 0.7674418604651163,
+          "passed": true,
+          "threshold": 0.7,
+          "evaluation_cost": 0.0022028,
+          "evaluation_model": "gpt-6-luna",
+          "reason": "The score is 0.77 because the context directly covers key local-versus-VPS tradeoffs, including local privacy, lower latency, one-time versus monthly costs, hardware access, and VPS uptime and reliability. However, much of the context is unrelated (for example, “Skill definitions and custom tools” and comparisons with ChatGPT or Claude), and security is mentioned without a detailed local-versus-VPS comparison.",
+          "error": null
+        }
+      ]
+    },
+    {
+      "run_index": 0,
+      "case_id": "synthetic:4",
+      "golden_set": "synthetic",
+      "category": null,
+      "input": "Assess Moltbot's delegated-exec tradeoffs: API-key sprawl, async latency, impersonation risk, and vibe-coded fragility.",
+      "expected_output": "Moltbot's delegated-execution model is powerful, but the tradeoffs are significant:\n\n- **API-key sprawl / setup burden:** Users report heavy configuration overhead, including \"dozens and dozens of API keys,\" and say it requires comfort running services on your own infrastructure.\n- **Async latency:** Telegram-style asynchronous workflows frustrate users because responses can take time, and people want quick acknowledgment that a task was received before long processing.\n- **Impersonation risk:** A core concern is that Moltbot can act too much \"on your behalf\" rather than like a collaborative assistant. This has led to reported email mishaps and concerns about unclear delegation boundaries.\n- **Vibe-coded fragility:** Long-term users describe the project as powerful but \"very much vibe-code,\" with concerns about rough implementation quality, breaking changes, and lack of commercial-grade polish or support.\n\nOverall, users see Moltbot as uniquely capable because it can actually execute tasks, not just suggest them, but that advantage comes with real reliability, trust, and security risks.",
+      "session_id": "evaluation_session_b86fe3aa-209e-463c-95ba-44fecff2a385",
+      "latency_seconds": 9.594,
+      "app": {
+        "resolved_model_ids": [
+          "gpt-6-luna"
+        ],
+        "per_model": {
+          "gpt-6-luna": {
+            "input_tokens": 2881,
+            "cached_input_tokens": 0,
+            "output_tokens": 325,
+            "reasoning_tokens": 0,
+            "cost_usd": 0.0004506
+          }
+        },
+        "input_tokens": 2881,
+        "cached_input_tokens": 0,
+        "output_tokens": 325,
+        "reasoning_tokens": 0,
+        "cost_usd": 0.0004506,
+        "record_run_estimated_cost_usd": 0.0004506
+      },
+      "actual_output": "Moltbot’s delegated execution offers broad automation, but the context points to substantial tradeoffs:\n\n- **API-key sprawl:** Setup can require “dozens and dozens” of API keys, adding friction. Because keys and other credentials are stored in plaintext local files, a compromised host could expose them.\n- **Async latency:** The provided context mentions lengthy processing, but does not explain its causes or quantify latency, so the async tradeoff cannot be assessed further.\n- **Impersonation risk:** Moltbot can act through integrated services and send messages on a user’s behalf. Users report email mishaps and impersonation issues when it acted without proper confirmation; a compromised messaging account can also open indirect access to connected systems.\n- **Vibe-coded fragility:** Users describe the codebase as “vibe-coded” and inconsistently documented, raising concerns about maturity and production readiness.\n\nOverall, delegation can save effort, but it expands the consequences of mistakes or compromise. The context does not provide enough detail to characterize async latency beyond noting lengthy processing.",
+      "trace": {
+        "route": "retrieve",
+        "tool_calls": {
+          "vectorstore": 1,
+          "web": 0,
+          "other": 0
+        },
+        "retrieved_doc_sources": {
+          "paper": 7,
+          "web": 0
+        },
+        "retrieved_count": 7,
+        "unique_chunk_count": 7,
+        "retrieval_attempts": 1,
+        "rewrite_count": 0,
+        "retrieval_context_sha256": "32e7c6ca2c364b0110f8a686a031b04262bbe7fe33996af1df8027c5aff8f8f7"
+      },
+      "judge": {
+        "ledger_cost_usd": 0.0049545,
+        "cost_usd": 0.0049545,
+        "metric_cost_usd": 0.0049545,
+        "by_metric": {
+          "Faithfulness": 0.0010938999999999999,
+          "Answer Relevancy": 0.00036490000000000003,
+          "Contextual Precision": 0.0006159000000000001,
+          "Contextual Recall": 0.0005662,
+          "Contextual Relevancy": 0.0023136000000000003
+        }
+      },
+      "success": true,
+      "metrics": [
+        {
+          "name": "Faithfulness",
+          "score": 1.0,
+          "passed": true,
+          "threshold": 0.7,
+          "evaluation_cost": 0.0010938999999999999,
+          "evaluation_model": "gpt-6-luna",
+          "reason": "The score is 1.00 because there are no contradictions; the actual output is fully faithful to the retrieval context.",
+          "error": null
+        },
+        {
+          "name": "Answer Relevancy",
+          "score": 1.0,
+          "passed": true,
+          "threshold": 0.7,
+          "evaluation_cost": 0.00036490000000000003,
+          "evaluation_model": "gpt-6-luna",
+          "reason": "The score is 1.00 because there are no irrelevant statements; the output directly addresses the requested tradeoffs.",
+          "error": null
+        },
+        {
+          "name": "Contextual Precision",
+          "score": 1.0,
+          "passed": true,
+          "threshold": 0.7,
+          "evaluation_cost": 0.0006159000000000001,
+          "evaluation_model": "gpt-6-luna",
+          "reason": "The score is 1.00 because the relevant nodes in retrieval contexts are ranked first through sixth and directly cover API-key burden, impersonation, security, and vibe-coded fragility; the irrelevant seventh node should be ranked lower because it focuses on the “Gateway Daemon” and “Session Management” without addressing the requested tradeoffs. The ranking is fully precise, though the contexts provide little direct support for async latency.",
+          "error": null
+        },
+        {
+          "name": "Contextual Recall",
+          "score": 0.8571428571428571,
+          "passed": true,
+          "threshold": 0.7,
+          "evaluation_cost": 0.0005662,
+          "evaluation_model": "gpt-6-luna",
+          "reason": "The score is 0.86 because sentences 1 and 3–5 are largely grounded in nodes 1–4 and 6–7, which describe setup burden, autonomous execution, impersonation and email concerns, security risks, and vibe-coded quality concerns. Sentence 2’s specific Telegram-style delays and desire for quick acknowledgment are not supported by the nodes in retrieval context, though node 4 does mention lengthy processing.",
+          "error": null
+        },
+        {
+          "name": "Contextual Relevancy",
+          "score": 0.7291666666666666,
+          "passed": true,
+          "threshold": 0.7,
+          "evaluation_cost": 0.0023136000000000003,
+          "evaluation_model": "gpt-6-luna",
+          "reason": "The score is 0.73 because the context directly supports several requested tradeoffs: it reports “dozens and dozens of API keys,” says “Processing is lengthy,” describes impersonation risks, and notes the codebase is “vibe-coded” with inconsistent documentation. However, much of the context covers broader security, adoption, and architecture issues rather than these four tradeoffs specifically.",
+          "error": null
+        }
+      ]
+    },
+    {
+      "run_index": 0,
+      "case_id": "synthetic:5",
+      "golden_set": "synthetic",
+      "category": null,
+      "input": "Summarize Moltbot risks incl. plaintext secrets, auth gaps, public exposure, malicious skills, infostealers.",
+      "expected_output": "Moltbot carries several major security risks:\n\n- **Plaintext secrets:** It stores sensitive credentials in plaintext under `~/.moltbot/`, including API keys, OAuth tokens, SSH keys, database strings, and service credentials. Research found real exposed secrets in public repositories, and there is **no encryption at rest**.\n- **Authentication gaps:** Default trust of localhost, weak initial authentication, no role-based access control, and long-lived sessions can leave the Control UI and admin functions insufficiently protected.\n- **Public exposure:** Security scans found **hundreds of internet-facing Moltbot instances**, including cases with **no authentication**, exposing command execution and configuration data. WebSocket/admin panels may also accept unauthenticated access.\n- **Malicious skills / supply chain risk:** Community skills can be installed with **full system access**, but there is **no rigorous code review, code signing, sandboxing, permission prompting, or audit trail**. Researchers demonstrated a malicious skill reaching #1 in the marketplace and being downloaded quickly.\n- **Infostealer targeting:** Malware such as **RedLine, Lumma, and Vidar** specifically target Moltbot-style local data. A compromised installation can expose conversation history, credentials, cloud/API keys, GitHub tokens, email/messaging access, and can even be turned into a **persistent backdoor**.",
+      "session_id": "evaluation_session_cde88f85-ef22-411e-a760-5e33cdebdaad",
+      "latency_seconds": 9.268,
+      "app": {
+        "resolved_model_ids": [
+          "gpt-6-luna"
+        ],
+        "per_model": {
+          "gpt-6-luna": {
+            "input_tokens": 2995,
+            "cached_input_tokens": 0,
+            "output_tokens": 378,
+            "reasoning_tokens": 0,
+            "cost_usd": 0.0004885
+          }
+        },
+        "input_tokens": 2995,
+        "cached_input_tokens": 0,
+        "output_tokens": 378,
+        "reasoning_tokens": 0,
+        "cost_usd": 0.0004885,
+        "record_run_estimated_cost_usd": 0.0004885
+      },
+      "actual_output": "Moltbot’s risks include:\n\n- **Plaintext secrets:** API keys, passwords, tokens, and other credentials are stored unencrypted in local Markdown and JSON files. Anyone or any malware able to read those files could extract them.\n- **Authentication and access-control gaps:** Localhost connections may be trusted automatically; default authentication may be weak, sessions may persist, and multi-user setups lack fine-grained roles. Exposed admin interfaces or WebSocket endpoints may accept connections without adequate verification.\n- **Public exposure:** Security scans found hundreds of internet-facing instances, including admin panels accessible without authentication. Such access could expose conversations and credentials or allow commands to be run on the host.\n- **Malicious skills and updates:** Third-party skills run with full system access, and compromised maintainers could distribute malicious updates to many installations.\n- **Infostealers:** Researchers reported that malware families such as RedLine, Lumma, and Vidar target Moltbot-like local directories. A compromised installation could expose conversation histories, credentials, cloud-service keys, and access to connected accounts.\n\nThe report also notes the absence of directory sandboxing and that Moltbot’s shell tool can execute arbitrary commands without sandboxing, increasing the impact of compromise.",
+      "trace": {
+        "route": "retrieve",
+        "tool_calls": {
+          "vectorstore": 1,
+          "web": 0,
+          "other": 0
+        },
+        "retrieved_doc_sources": {
+          "paper": 8,
+          "web": 0
+        },
+        "retrieved_count": 8,
+        "unique_chunk_count": 8,
+        "retrieval_attempts": 1,
+        "rewrite_count": 0,
+        "retrieval_context_sha256": "2df89fea2838f5a354a4a3ac5b27f7fcacf7f3c9e462d3c0d8a2693ef84c16cf"
+      },
+      "judge": {
+        "ledger_cost_usd": 0.0046925,
+        "cost_usd": 0.0046925,
+        "metric_cost_usd": 0.0046925,
+        "by_metric": {
+          "Faithfulness": 0.0010837,
+          "Answer Relevancy": 0.00037329999999999997,
+          "Contextual Precision": 0.0005652,
+          "Contextual Recall": 0.0006837,
+          "Contextual Relevancy": 0.0019866
+        }
+      },
+      "success": true,
+      "metrics": [
+        {
+          "name": "Faithfulness",
+          "score": 1.0,
+          "passed": true,
+          "threshold": 0.7,
+          "evaluation_cost": 0.0010837,
+          "evaluation_model": "gpt-6-luna",
+          "reason": "The score is 1.00 because there are no contradictions; the actual output is fully consistent with the retrieval context.",
+          "error": null
+        },
+        {
+          "name": "Answer Relevancy",
+          "score": 1.0,
+          "passed": true,
+          "threshold": 0.7,
+          "evaluation_cost": 0.00037329999999999997,
+          "evaluation_model": "gpt-6-luna",
+          "reason": "The score is 1.00 because the response directly summarizes all the requested Moltbot risks, with no irrelevant statements.",
+          "error": null
+        },
+        {
+          "name": "Contextual Precision",
+          "score": 0.9761904761904762,
+          "passed": true,
+          "threshold": 0.7,
+          "evaluation_cost": 0.0005652,
+          "evaluation_model": "gpt-6-luna",
+          "reason": "The score is 0.98 because the first five nodes in the retrieval contexts directly support the requested risks, and another relevant node appears at rank 7. It is not higher because irrelevant nodes appear at ranks 6 and 8: the rank-6 node “does not substantively support the specific risks,” and the rank-8 node “does not directly substantiate the listed plaintext-secret, authentication, skills, or infostealer claims.” Their placement after most relevant nodes keeps the score very high, though the rank-6 interruption slightly reduces precision.",
+          "error": null
+        },
+        {
+          "name": "Contextual Recall",
+          "score": 1.0,
+          "passed": true,
+          "threshold": 0.7,
+          "evaluation_cost": 0.0006837,
+          "evaluation_model": "gpt-6-luna",
+          "reason": "The score is 1.00 because every sentence in the expected output is supported by nodes in retrieval context: nodes 1–3 support the plaintext secrets and public exposure claims; node 6 supports the authentication gaps; nodes 1, 2, 4, and 5 support the malicious-skills risks; and node 4 supports the infostealer targeting and impact claims. Great coverage overall.",
+          "error": null
+        },
+        {
+          "name": "Contextual Relevancy",
+          "score": 0.9166666666666666,
+          "passed": true,
+          "threshold": 0.7,
+          "evaluation_cost": 0.0019866,
+          "evaluation_model": "gpt-6-luna",
+          "reason": "The score is 0.92 because the context directly covers the requested risks, including plaintext secrets (“stores API keys, passwords, and authentication tokens in plaintext”), authentication gaps and public exposure (“unauthenticated administrative access”), malicious skills (“malicious updates could automatically spread”), and infostealers (“RedLine, Lumma, and Vidar”). The small amount of irrelevant material concerns meal planning, service availability, and deployment recommendations.",
+          "error": null
+        }
+      ]
+    },
+    {
+      "run_index": 0,
+      "case_id": "synthetic:6",
+      "golden_set": "synthetic",
+      "category": null,
+      "input": "Assess OpenClaw's niche agentic workflows across shell, browser, email, calendar, FS, and 50+ integrations.",
+      "expected_output": "OpenClaw's niche is **true agentic automation**, not just chat. According to the report, it can:\n\n- **Shell/terminal:** execute shell commands and terminal operations  \n- **Browser:** automate web interaction and scraping  \n- **Email:** send and manage emails across multiple accounts  \n- **Calendar:** manage calendars and automated reminders  \n- **Filesystem:** read, write, and organize local files  \n- **Integrations:** connect with **50+ third-party services and platforms**  \n- **Code workflows:** run and debug code with iterative refinement  \n\nThis makes OpenClaw especially strong for **self-hosted, privacy-first users** who want an AI assistant that can proactively act across local systems and connected tools.\n\nHowever, the report stresses that these strengths come with **significant security risks, deployment complexity, and an immature security posture**, so it is best suited to **technical users comfortable with self-hosting and security management**, not most organizations or non-technical users.",
+      "session_id": "evaluation_session_62376c06-96af-4e70-a5dc-10625f2e7177",
+      "latency_seconds": 9.695,
+      "app": {
+        "resolved_model_ids": [
+          "gpt-6-luna"
+        ],
+        "per_model": {
+          "gpt-6-luna": {
+            "input_tokens": 2618,
+            "cached_input_tokens": 0,
+            "output_tokens": 359,
+            "reasoning_tokens": 0,
+            "cost_usd": 0.0004413
+          }
+        },
+        "input_tokens": 2618,
+        "cached_input_tokens": 0,
+        "output_tokens": 359,
+        "reasoning_tokens": 0,
+        "cost_usd": 0.0004413,
+        "record_run_estimated_cost_usd": 0.0004413
+      },
+      "actual_output": "OpenClaw’s niche is **hands-on, cross-tool automation** rather than a simple chat assistant. The context says it can execute shell commands, run and debug code iteratively, automate browser interactions and scraping, send and manage email, handle calendars and reminders, and read, write, and organize local files. It also reports integrations with **50+ third-party services**, spanning areas such as development, productivity, finance, health, content, and smart-home control.\n\nTogether, these capabilities support workflows that cross domains—for example, monitoring email, coordinating calendar scheduling, and acting on files or code. The report also describes proactive reminders and recurring jobs, plus an extensible skills ecosystem. The tradeoff is that these workflows require broad access to accounts, devices, or systems; the report flags security and configuration risks and says the tool is better suited to technical users than to people seeking a simple, low-risk assistant.",
+      "trace": {
+        "route": "retrieve",
+        "tool_calls": {
+          "vectorstore": 1,
+          "web": 0,
+          "other": 0
+        },
+        "retrieved_doc_sources": {
+          "paper": 6,
+          "web": 0
+        },
+        "retrieved_count": 6,
+        "unique_chunk_count": 6,
+        "retrieval_attempts": 1,
+        "rewrite_count": 0,
+        "retrieval_context_sha256": "4cafb230375811af68894c4a3d431e73ae1444eaf753bbd3cd70a603a4b2c39b"
+      },
+      "judge": {
+        "ledger_cost_usd": 0.0041854,
+        "cost_usd": 0.0041854,
+        "metric_cost_usd": 0.0041854,
+        "by_metric": {
+          "Faithfulness": 0.0007991999999999999,
+          "Answer Relevancy": 0.0004173,
+          "Contextual Precision": 0.0004909000000000001,
+          "Contextual Recall": 0.0006349999999999999,
+          "Contextual Relevancy": 0.001843
+        }
+      },
+      "success": true,
+      "metrics": [
+        {
+          "name": "Faithfulness",
+          "score": 1.0,
+          "passed": true,
+          "threshold": 0.7,
+          "evaluation_cost": 0.0007991999999999999,
+          "evaluation_model": "gpt-6-luna",
+          "reason": "The score is 1.00 because there are no contradictions; the actual output is fully consistent with the retrieval context.",
+          "error": null
+        },
+        {
+          "name": "Answer Relevancy",
+          "score": 1.0,
+          "passed": true,
+          "threshold": 0.7,
+          "evaluation_cost": 0.0004173,
+          "evaluation_model": "gpt-6-luna",
+          "reason": "The score is 1.00 because there are no identified irrelevant statements, indicating the answer was fully relevant to the request.",
+          "error": null
+        },
+        {
+          "name": "Contextual Precision",
+          "score": 0.7708333333333333,
+          "passed": true,
+          "threshold": 0.7,
+          "evaluation_cost": 0.0004909000000000001,
+          "evaluation_model": "gpt-6-luna",
+          "reason": "The score is 0.77 because the first node in the retrieval contexts directly lists the requested workflows, while relevant supporting nodes appear at ranks 3 and 4 and the security caveats at rank 6. It is not higher because irrelevant nodes are interspersed: the second node discusses “competitors, marketplace skills, device capabilities, and cost,” and the fifth node “lists alternatives” without substantiating the requested assessment; these should rank below the relevant nodes.",
+          "error": null
+        },
+        {
+          "name": "Contextual Recall",
+          "score": 1.0,
+          "passed": true,
+          "threshold": 0.7,
+          "evaluation_cost": 0.0006349999999999999,
+          "evaluation_model": "gpt-6-luna",
+          "reason": "The score is 1.00 because the 1st node in retrieval context supports the agentic-automation characterization and every listed capability in sentences 1–9; nodes 3 and 4 support proactive action, and node 6 supports the technical-user and security-risk cautions in the final sentence. Great coverage overall!",
+          "error": null
+        },
+        {
+          "name": "Contextual Relevancy",
+          "score": 0.8571428571428571,
+          "passed": true,
+          "threshold": 0.7,
+          "evaluation_cost": 0.001843,
+          "evaluation_model": "gpt-6-luna",
+          "reason": "The score is 0.86 because the context directly covers the requested workflows, including “execute shell commands,” “manage calendars,” “control browser automation,” “send and manage emails,” and “read, write, and organize local filesystem operations,” plus integration with “50+ third-party services.” Some material is unrelated, such as device sensors, pricing, licensing, alternatives, and security concerns.",
+          "error": null
+        }
+      ]
+    },
+    {
+      "run_index": 0,
+      "case_id": "synthetic:7",
+      "golden_set": "synthetic",
+      "category": null,
+      "input": "Assess Moltbot's viability for self-hosted power users vs regulated enterprises with SSO/RBAC needs.",
+      "expected_output": "Moltbot is much more viable for self-hosted power users than for regulated enterprises.\n\n- For self-hosted power users: It is compelling because of its privacy-first local architecture, autonomous capabilities, open-source extensibility, multi-platform integrations, and cost advantages. The context says it offers \"genuinely transformative capabilities\" for technically capable individuals who can handle setup time and security responsibilities.\n\n- For regulated enterprises with SSO/RBAC needs: It is not a strong fit today. The context highlights serious security vulnerabilities, immature code quality, high setup complexity, inconsistent documentation, and no commercial support. It also says production deployment of the current version carries significant risk that most organizations should not accept.\n\n- Specifically for SSO/RBAC: These are listed only as speculative medium-term enterprise features, alongside audit logging, which suggests they are not mature or available enough yet for regulated environments.\n\nBottom line: Good option for skilled individual self-hosters; poor current fit for regulated enterprises needing enterprise-grade controls like SSO, RBAC, auditability, and lower operational risk.",
+      "session_id": "evaluation_session_cd737204-b5ef-4d16-a344-9e2042901514",
+      "latency_seconds": 10.973,
+      "app": {
+        "resolved_model_ids": [
+          "gpt-6-luna"
+        ],
+        "per_model": {
+          "gpt-6-luna": {
+            "input_tokens": 2907,
+            "cached_input_tokens": 0,
+            "output_tokens": 298,
+            "reasoning_tokens": 0,
+            "cost_usd": 0.0004397
+          }
+        },
+        "input_tokens": 2907,
+        "cached_input_tokens": 0,
+        "output_tokens": 298,
+        "reasoning_tokens": 0,
+        "cost_usd": 0.0004397,
+        "record_run_estimated_cost_usd": 0.0004397
+      },
+      "actual_output": "Moltbot looks more viable for **self-hosted power users** than for regulated enterprises today. The report identifies technically capable, privacy-conscious users who want deep integration and customization as suitable candidates, while noting that self-hosting requires command-line skills, API management, and ongoing maintenance.\n\nFor **regulated enterprises needing SSO/RBAC**, the fit is weak in the current version. SSO, audit logging, and RBAC are listed as possible future enterprise features, not established capabilities. The report also flags security and compliance concerns, including limited monitoring, manual patching, and responsibility for governance and incident response, and says most organizations should not accept the risks of production deployment of the current version.\n\nSo, power users may find it useful if they can manage the operational and security burden; regulated enterprises should be cautious and should not assume the needed enterprise controls are available.",
+      "trace": {
+        "route": "retrieve",
+        "tool_calls": {
+          "vectorstore": 1,
+          "web": 0,
+          "other": 0
+        },
+        "retrieved_doc_sources": {
+          "paper": 8,
+          "web": 0
+        },
+        "retrieved_count": 8,
+        "unique_chunk_count": 8,
+        "retrieval_attempts": 1,
+        "rewrite_count": 0,
+        "retrieval_context_sha256": "d5423b3a4a20435330c4d976708f483abebeafd617ac6c859f7398b2bd883047"
+      },
+      "judge": {
+        "ledger_cost_usd": 0.0051764,
+        "cost_usd": 0.0051764,
+        "metric_cost_usd": 0.0051764,
+        "by_metric": {
+          "Faithfulness": 0.0011596,
+          "Answer Relevancy": 0.00033739999999999996,
+          "Contextual Precision": 0.0006031000000000001,
+          "Contextual Recall": 0.0006477,
+          "Contextual Relevancy": 0.0024285999999999995
+        }
+      },
+      "success": true,
+      "metrics": [
+        {
+          "name": "Faithfulness",
+          "score": 0.875,
+          "passed": true,
+          "threshold": 0.7,
+          "evaluation_cost": 0.0011596,
+          "evaluation_model": "gpt-6-luna",
+          "reason": "The score is 0.88 because the actual output mischaracterizes audit logging as a possible future feature, when the report lists it as a security measure, and incorrectly identifies SSO and RBAC as future features.",
+          "error": null
+        },
+        {
+          "name": "Answer Relevancy",
+          "score": 1.0,
+          "passed": true,
+          "threshold": 0.7,
+          "evaluation_cost": 0.00033739999999999996,
+          "evaluation_model": "gpt-6-luna",
+          "reason": "The score is 1.00 because the response directly assesses Moltbot's viability for both self-hosted power users and regulated enterprises with SSO/RBAC needs, with no irrelevant statements.",
+          "error": null
+        },
+        {
+          "name": "Contextual Precision",
+          "score": 1.0,
+          "passed": true,
+          "threshold": 0.7,
+          "evaluation_cost": 0.0006031000000000001,
+          "evaluation_model": "gpt-6-luna",
+          "reason": "The score is 1.00 because all eight retrieval-context nodes are relevant and ranked in a useful order: the first node directly addresses missing “SSO, audit logging, RBAC,” followed by nodes on power-user suitability, self-hosting skills, regulatory fit, and operational and security risks. No irrelevant nodes are included, so there is no ranking issue lowering the score.",
+          "error": null
+        },
+        {
+          "name": "Contextual Recall",
+          "score": 1.0,
+          "passed": true,
+          "threshold": 0.7,
+          "evaluation_cost": 0.0006477,
+          "evaluation_model": "gpt-6-luna",
+          "reason": "The score is 1.00 because every sentence is supported by nodes in retrieval context: nodes 2, 3, and 6 support the self-hosted power-user fit and its advantages or technical burden (sentences 1–2 and the bottom line); nodes 1 and 6 support the immature or speculative SSO/RBAC features and enterprise deployment risks (sentences 3–4 and the bottom line).",
+          "error": null
+        },
+        {
+          "name": "Contextual Relevancy",
+          "score": 0.8695652173913043,
+          "passed": true,
+          "threshold": 0.7,
+          "evaluation_cost": 0.0024285999999999995,
+          "evaluation_model": "gpt-6-luna",
+          "reason": "The score is 0.87 because the context directly addresses both audiences: power users should consider Moltbot, while regulated industries without dedicated security expertise should not; it also says enterprise SSO, audit logging, and RBAC are only speculative medium-term possibilities. Self-hosting burdens and security risks further inform the assessment. Some content is unrelated, including mobile improvements, stock prices, and “authentic human communication,” which lowers the score.",
+          "error": null
+        }
+      ]
+    },
+    {
+      "run_index": 0,
+      "case_id": "synthetic:8",
+      "golden_set": "synthetic",
+      "category": null,
+      "input": "What key strengths and weaknesses justify Moltbot's 3.5/5 overall rating?",
+      "expected_output": "Moltbot's **3.5/5 rating** is justified by a strong mix of innovation and clear risk.\n\n**Key strengths**\n- **Revolutionary autonomous capabilities** not typically available in cloud AI assistants\n- **Privacy-first local architecture**, appealing for users who want more control\n- **Extensible open-source ecosystem** with active community development\n- **Multi-platform messaging integration**\n- **Cost-effective** compared with commercial alternatives\n- Strong market interest, shown by **103,000+ GitHub stars in 3 months**\n\n**Key weaknesses**\n- **Serious security vulnerabilities**, making production use risky for most organizations\n- **High technical complexity** and major setup burden, including reports of needing many API keys\n- **Immature codebase quality** and inconsistent documentation\n- **No commercial support available**\n- Concerns about **production readiness**, with expert security warnings and dependency on the founder\n\nOverall, the score reflects that Moltbot is highly promising and transformative, especially for technical individual users, but not mature or secure enough yet for broad enterprise deployment.",
+      "session_id": "evaluation_session_6338739a-20e5-4b44-ae57-bd6fa5dc9d15",
+      "latency_seconds": 9.533,
+      "app": {
+        "resolved_model_ids": [
+          "gpt-6-luna"
+        ],
+        "per_model": {
+          "gpt-6-luna": {
+            "input_tokens": 2432,
+            "cached_input_tokens": 0,
+            "output_tokens": 231,
+            "reasoning_tokens": 0,
+            "cost_usd": 0.0003587
+          }
+        },
+        "input_tokens": 2432,
+        "cached_input_tokens": 0,
+        "output_tokens": 231,
+        "reasoning_tokens": 0,
+        "cost_usd": 0.0003587,
+        "record_run_estimated_cost_usd": 0.0003587
+      },
+      "actual_output": "Moltbot’s **3.5/5 rating for individual users** reflects its strong capabilities and privacy-focused design, balanced against substantial risks and usability hurdles.\n\n**Strengths:** autonomous capabilities, local-first privacy, an extensible open-source ecosystem, active development and community, multi-platform messaging integration, and cost-effectiveness compared with commercial alternatives.\n\n**Weaknesses:** serious security vulnerabilities, high technical complexity and setup burden, immature code quality, inconsistent documentation, and no commercial support.",
+      "trace": {
+        "route": "retrieve",
+        "tool_calls": {
+          "vectorstore": 1,
+          "web": 0,
+          "other": 0
+        },
+        "retrieved_doc_sources": {
+          "paper": 5,
+          "web": 0
+        },
+        "retrieved_count": 5,
+        "unique_chunk_count": 5,
+        "retrieval_attempts": 1,
+        "rewrite_count": 0,
+        "retrieval_context_sha256": "eee7c5425212fce777514abf1650d1655ec9b1b0663576eee41b38cec8a4f92e"
+      },
+      "judge": {
+        "ledger_cost_usd": 0.0035989,
+        "cost_usd": 0.0035989,
+        "metric_cost_usd": 0.0035989,
+        "by_metric": {
+          "Faithfulness": 0.0007123,
+          "Answer Relevancy": 0.0003519,
+          "Contextual Precision": 0.0004219,
+          "Contextual Recall": 0.0005993,
+          "Contextual Relevancy": 0.0015134999999999999
+        }
+      },
+      "success": true,
+      "metrics": [
+        {
+          "name": "Faithfulness",
+          "score": 1.0,
+          "passed": true,
+          "threshold": 0.7,
+          "evaluation_cost": 0.0007123,
+          "evaluation_model": "gpt-6-luna",
+          "reason": "The score is 1.00 because there are no contradictions; the actual output aligns with the retrieval context.",
+          "error": null
+        },
+        {
+          "name": "Answer Relevancy",
+          "score": 1.0,
+          "passed": true,
+          "threshold": 0.7,
+          "evaluation_cost": 0.0003519,
+          "evaluation_model": "gpt-6-luna",
+          "reason": "The score is 1.00 because there are no irrelevant statements; the response directly addresses the question about Moltbot's rating.",
+          "error": null
+        },
+        {
+          "name": "Contextual Precision",
+          "score": 0.8875,
+          "passed": true,
+          "threshold": 0.7,
+          "evaluation_cost": 0.0004219,
+          "evaluation_model": "gpt-6-luna",
+          "reason": "The score is 0.89 because the first two nodes in the retrieval contexts are highly relevant: the first directly gives the 3.5/5 rating and its strengths and weaknesses, and the second supports market interest with “over 103,000 stars within three months of launch.” The third node is irrelevant because it focuses on growth and virality without explaining the rating, so it should rank below the relevant nodes; however, relevant supporting nodes appear both before and after it, including the fourth on market interest and autonomous capabilities and the fifth on security and usability tradeoffs, keeping precision high but below perfect.",
+          "error": null
+        },
+        {
+          "name": "Contextual Recall",
+          "score": 0.8461538461538461,
+          "passed": true,
+          "threshold": 0.7,
+          "evaluation_cost": 0.0005993,
+          "evaluation_model": "gpt-6-luna",
+          "reason": "The score is 0.85 because nodes in retrieval context 1–5 support the rating, most listed strengths and weaknesses, and the conclusion that Moltbot is promising for technical users but not ready for broad enterprise use. However, no node supports the specific reports of needing many API keys or the expert warnings and founder dependency mentioned in the expected output.",
+          "error": null
+        },
+        {
+          "name": "Contextual Relevancy",
+          "score": 0.7096774193548387,
+          "passed": true,
+          "threshold": 0.7,
+          "evaluation_cost": 0.0015134999999999999,
+          "evaluation_model": "gpt-6-luna",
+          "reason": "The score is 0.71 because the context directly answers the question with the 3.5/5 rating and its strengths—“privacy-first local architecture” and “extensible open-source ecosystem”—and weaknesses, including “serious security vulnerabilities” and “high technical complexity.” However, much of the context is unrelated, such as the date and report headings, and other material discusses growth, naming, and ethics rather than explaining the rating.",
+          "error": null
+        }
+      ]
+    },
+    {
+      "run_index": 0,
+      "case_id": "synthetic:9",
+      "golden_set": "synthetic",
+      "category": null,
+      "input": "Compare Moltbot's plaintext credential storage with encrypted secret managers' at-rest protection.",
+      "expected_output": "Moltbot stores secrets like API keys, OAuth tokens, database strings, SSH keys, and certs in plaintext JSON/Markdown under `~/.moltbot/`, with no encryption at rest. That means any process or attacker with file read access can directly extract all credentials.\n\nBy contrast, encrypted secret managers protect secrets at rest, so stored credentials are not readable without the decryption mechanism or authorized access. In short: Moltbot makes credential theft trivial after host compromise, while encrypted secret managers add a meaningful protection layer for stored secrets.",
+      "session_id": "evaluation_session_2658a204-609b-4bf2-897b-452f57ddbdc2",
+      "latency_seconds": 11.494,
+      "app": {
+        "resolved_model_ids": [
+          "gpt-6-luna"
+        ],
+        "per_model": {
+          "gpt-6-luna": {
+            "input_tokens": 2847,
+            "cached_input_tokens": 1110,
+            "output_tokens": 222,
+            "reasoning_tokens": 0,
+            "cost_usd": 0.0003957
+          }
+        },
+        "input_tokens": 2847,
+        "cached_input_tokens": 1110,
+        "output_tokens": 222,
+        "reasoning_tokens": 0,
+        "cost_usd": 0.0003957,
+        "record_run_estimated_cost_usd": 0.0003957
+      },
+      "actual_output": "Moltbot stores credentials in plaintext Markdown and JSON files under `~/.moltbot/`, without encryption at rest. The report says any process that can read those files can extract the secrets. Encrypted secret managers, by contrast, protect stored credentials with encryption at rest; the context does not specify how any particular manager implements that protection.",
+      "trace": {
+        "route": "retrieve",
+        "tool_calls": {
+          "vectorstore": 2,
+          "web": 0,
+          "other": 0
+        },
+        "retrieved_doc_sources": {
+          "paper": 5,
+          "web": 0
+        },
+        "retrieved_count": 5,
+        "unique_chunk_count": 5,
+        "retrieval_attempts": 2,
+        "rewrite_count": 0,
+        "retrieval_context_sha256": "464fd21f96efd5b1626db0979e80c6d4ff3871677a2a3a4c02c1cb711eef4864"
+      },
+      "judge": {
+        "ledger_cost_usd": 0.0030915,
+        "cost_usd": 0.0030915,
+        "metric_cost_usd": 0.0030915,
+        "by_metric": {
+          "Faithfulness": 0.0006514000000000001,
+          "Answer Relevancy": 0.00021510000000000002,
+          "Contextual Precision": 0.0003862,
+          "Contextual Recall": 0.0004485,
+          "Contextual Relevancy": 0.0013903000000000001
+        }
+      },
+      "success": false,
+      "metrics": [
+        {
+          "name": "Faithfulness",
+          "score": 1.0,
+          "passed": true,
+          "threshold": 0.7,
+          "evaluation_cost": 0.0006514000000000001,
+          "evaluation_model": "gpt-6-luna",
+          "reason": "The score is 1.00 because there are no contradictions, so the actual output is fully faithful to the retrieval context.",
+          "error": null
+        },
+        {
+          "name": "Answer Relevancy",
+          "score": 1.0,
+          "passed": true,
+          "threshold": 0.7,
+          "evaluation_cost": 0.00021510000000000002,
+          "evaluation_model": "gpt-6-luna",
+          "reason": "The score is 1.00 because the response directly compares Moltbot’s plaintext credential storage with encrypted secret managers’ at-rest protection, with no irrelevant statements.",
+          "error": null
+        },
+        {
+          "name": "Contextual Precision",
+          "score": 1.0,
+          "passed": true,
+          "threshold": 0.7,
+          "evaluation_cost": 0.0003862,
+          "evaluation_model": "gpt-6-luna",
+          "reason": "The score is 1.00 because all retrieval-context nodes are relevant and ranked highly: the first node directly compares Moltbot’s plaintext storage with the lack of encryption, and the following nodes reinforce the at-rest exposure and affected credentials. No irrelevant nodes appear ahead of or among the relevant nodes, so there is no reason for a higher score.",
+          "error": null
+        },
+        {
+          "name": "Contextual Recall",
+          "score": 0.5,
+          "passed": false,
+          "threshold": 0.7,
+          "evaluation_cost": 0.0004485,
+          "evaluation_model": "gpt-6-luna",
+          "reason": "The score is 0.50 because sentence 1 is supported by nodes 1 and 5 in retrieval context, which identify plaintext storage under `~/.moltbot/`, the credential types, and their extractability. Sentence 2’s contrast with encrypted secret managers, including the need for decryption or authorized access and the added protection layer, is not established by the nodes in retrieval context.",
+          "error": null
+        },
+        {
+          "name": "Contextual Relevancy",
+          "score": 0.35714285714285715,
+          "passed": false,
+          "threshold": 0.7,
+          "evaluation_cost": 0.0013903000000000001,
+          "evaluation_model": "gpt-6-luna",
+          "reason": "The score is 0.36 because most context concerns unrelated controls such as “directory sandboxing” and “internet exposure,” but relevant statements say Moltbot stores credentials in “plaintext JSON and Markdown files” and “does not encrypt stored credentials at rest,” directly supporting comparison with encrypted secret managers.",
+          "error": null
+        }
+      ]
+    },
+    {
+      "run_index": 0,
+      "case_id": "curated:0",
+      "golden_set": "curated",
+      "category": "factual",
+      "input": "What was the project originally named when it launched, and what caused it to be renamed to Moltbot?",
+      "expected_output": "The project originally launched as \"Clawdbot\" on November 24, 2025, with a lobster mascot named \"Clawd.\" On January 27, 2026, Anthropic (the company behind Claude) sent a trademark notice to creator Peter Steinberger, citing the similarity between \"Clawd\" and \"Claude.\" This forced a rename, and the project was rebranded to \"Moltbot\" the same day, referencing how lobsters molt to grow.",
+      "session_id": "evaluation_session_876f3621-e2f9-4bdc-970f-d7fad36fadc1",
+      "latency_seconds": 10.415,
+      "app": {
+        "resolved_model_ids": [
+          "gpt-6-luna"
+        ],
+        "per_model": {
+          "gpt-6-luna": {
+            "input_tokens": 2202,
+            "cached_input_tokens": 0,
+            "output_tokens": 148,
+            "reasoning_tokens": 0,
+            "cost_usd": 0.0002942
+          }
+        },
+        "input_tokens": 2202,
+        "cached_input_tokens": 0,
+        "output_tokens": 148,
+        "reasoning_tokens": 0,
+        "cost_usd": 0.0002942,
+        "record_run_estimated_cost_usd": 0.0002942
+      },
+      "actual_output": "The project launched as **Clawdbot**. On January 27, 2026, Anthropic sent its creator a trademark notice because “Clawd” was considered too similar to “Claude,” prompting the rename to **Moltbot**.",
+      "trace": {
+        "route": "retrieve",
+        "tool_calls": {
+          "vectorstore": 1,
+          "web": 0,
+          "other": 0
+        },
+        "retrieved_doc_sources": {
+          "paper": 4,
+          "web": 0
+        },
+        "retrieved_count": 4,
+        "unique_chunk_count": 4,
+        "retrieval_attempts": 1,
+        "rewrite_count": 0,
+        "retrieval_context_sha256": "c199477bb54ad0e45e26076f26c92f99286b5f38885b61937152c325cef880d0"
+      },
+      "judge": {
+        "ledger_cost_usd": 0.002565,
+        "cost_usd": 0.002565,
+        "metric_cost_usd": 0.002565,
+        "by_metric": {
+          "Faithfulness": 0.0004727,
+          "Answer Relevancy": 0.00019840000000000002,
+          "Contextual Precision": 0.0003757,
+          "Contextual Recall": 0.00038940000000000003,
+          "Contextual Relevancy": 0.0011288
+        }
+      },
+      "success": false,
+      "metrics": [
+        {
+          "name": "Faithfulness",
+          "score": 1.0,
+          "passed": true,
+          "threshold": 0.7,
+          "evaluation_cost": 0.0004727,
+          "evaluation_model": "gpt-6-luna",
+          "reason": "The score is 1.00 because there are no contradictions; the actual output is fully consistent with the retrieval context.",
+          "error": null
+        },
+        {
+          "name": "Answer Relevancy",
+          "score": 1.0,
+          "passed": true,
+          "threshold": 0.7,
+          "evaluation_cost": 0.00019840000000000002,
+          "evaluation_model": "gpt-6-luna",
+          "reason": "The score is 1.00 because there are no irrelevant statements; the answer directly addresses the question about the project’s original name and why it was renamed.",
+          "error": null
+        },
+        {
+          "name": "Contextual Precision",
+          "score": 1.0,
+          "passed": true,
+          "threshold": 0.7,
+          "evaluation_cost": 0.0003757,
+          "evaluation_model": "gpt-6-luna",
+          "reason": "The score is 1.00 because the relevant nodes in retrieval contexts are ranked first: the first node gives the original name, “Clawdbot,” and the “Anthropic trademark notice” that prompted the rename; the second and third nodes further support the name and explain the cause. The irrelevant fourth node is ranked last and only lists references without providing the answer, so the relevant information is fully prioritized.",
+          "error": null
+        },
+        {
+          "name": "Contextual Recall",
+          "score": 1.0,
+          "passed": true,
+          "threshold": 0.7,
+          "evaluation_cost": 0.00038940000000000003,
+          "evaluation_model": "gpt-6-luna",
+          "reason": "The score is 1.00 because all sentences are supported by nodes in retrieval context: node 1 supports the original launch date, the Moltbot rebrand date, and its lobster-molting reference, while node 3 supports Anthropic’s trademark notice to Peter Steinberger concerning “Clawd” and “Claude.”",
+          "error": null
+        },
+        {
+          "name": "Contextual Relevancy",
+          "score": 0.5,
+          "passed": false,
+          "threshold": 0.7,
+          "evaluation_cost": 0.0011288,
+          "evaluation_model": "gpt-6-luna",
+          "reason": "The score is 0.50 because the context includes relevant facts—the project launched as “Clawdbot,” and an Anthropic trademark notice prompted the rename because “Clawd” was similar to “Claude”—but much of the other information does not answer the question.",
+          "error": null
+        }
+      ]
+    },
+    {
+      "run_index": 0,
+      "case_id": "curated:1",
+      "golden_set": "curated",
+      "category": "numeric",
+      "input": "What are the minimum and recommended hardware requirements to run Moltbot?",
+      "expected_output": "According to the hardware requirements table, the minimum is 4GB RAM, 10GB of free storage space, any modern processor, and a stable internet connection. The recommended configuration is 8GB+ RAM, 20GB+ storage, a multi-core CPU, and a broadband connection.",
+      "session_id": "evaluation_session_105eb0ed-c5d9-429a-bb50-e65eed390cd3",
+      "latency_seconds": 7.915,
+      "app": {
+        "resolved_model_ids": [
+          "gpt-6-luna"
+        ],
+        "per_model": {
+          "gpt-6-luna": {
+            "input_tokens": 2481,
+            "cached_input_tokens": 1244,
+            "output_tokens": 146,
+            "reasoning_tokens": 0,
+            "cost_usd": 0.0003211
+          }
+        },
+        "input_tokens": 2481,
+        "cached_input_tokens": 1244,
+        "output_tokens": 146,
+        "reasoning_tokens": 0,
+        "cost_usd": 0.0003211,
+        "record_run_estimated_cost_usd": 0.0003211
+      },
+      "actual_output": "The minimum requirements are **4 GB RAM**, **10 GB of free storage**, a **modern processor**, and a **stable internet connection**. Recommended are **8 GB or more RAM**, **20 GB or more storage**, a **multi-core processor**, and **broadband internet**.",
+      "trace": {
+        "route": "retrieve",
+        "tool_calls": {
+          "vectorstore": 1,
+          "web": 0,
+          "other": 0
+        },
+        "retrieved_doc_sources": {
+          "paper": 5,
+          "web": 0
+        },
+        "retrieved_count": 5,
+        "unique_chunk_count": 5,
+        "retrieval_attempts": 1,
+        "rewrite_count": 0,
+        "retrieval_context_sha256": "2c92579b8d68679fa92a680e2d1f4355217edcde3069d2b188672087997a8e10"
+      },
+      "judge": {
+        "ledger_cost_usd": 0.0031286,
+        "cost_usd": 0.0031286,
+        "metric_cost_usd": 0.0031286,
+        "by_metric": {
+          "Faithfulness": 0.000662,
+          "Answer Relevancy": 0.0002225,
+          "Contextual Precision": 0.000355,
+          "Contextual Recall": 0.0003003,
+          "Contextual Relevancy": 0.0015888
+        }
+      },
+      "success": false,
+      "metrics": [
+        {
+          "name": "Faithfulness",
+          "score": 1.0,
+          "passed": true,
+          "threshold": 0.7,
+          "evaluation_cost": 0.000662,
+          "evaluation_model": "gpt-6-luna",
+          "reason": "The score is 1.00 because there are no contradictions; the actual output is fully consistent with the retrieval context.",
+          "error": null
+        },
+        {
+          "name": "Answer Relevancy",
+          "score": 1.0,
+          "passed": true,
+          "threshold": 0.7,
+          "evaluation_cost": 0.0002225,
+          "evaluation_model": "gpt-6-luna",
+          "reason": "The score is 1.00 because there are no irrelevant statements; the response directly addresses the question.",
+          "error": null
+        },
+        {
+          "name": "Contextual Precision",
+          "score": 1.0,
+          "passed": true,
+          "threshold": 0.7,
+          "evaluation_cost": 0.000355,
+          "evaluation_model": "gpt-6-luna",
+          "reason": "The score is 1.00 because the first and second nodes in the retrieval contexts directly provide or repeat the requested minimum and recommended hardware requirements. The irrelevant nodes are ranked lower: the third discusses runtime usage, costs, and security; the fourth covers setup and dependencies; and the fifth discusses deployment options rather than hardware specifications.",
+          "error": null
+        },
+        {
+          "name": "Contextual Recall",
+          "score": 1.0,
+          "passed": true,
+          "threshold": 0.7,
+          "evaluation_cost": 0.0003003,
+          "evaluation_model": "gpt-6-luna",
+          "reason": "The score is 1.00 because sentence 1 is fully supported by node 1 in the retrieval context, which provides both the minimum and recommended hardware requirements. Great match!",
+          "error": null
+        },
+        {
+          "name": "Contextual Relevancy",
+          "score": 0.3225806451612903,
+          "passed": false,
+          "threshold": 0.7,
+          "evaluation_cost": 0.0015888,
+          "evaluation_model": "gpt-6-luna",
+          "reason": "The score is 0.32 because most of the context discusses unrelated topics such as hype, security, software prerequisites, and deployment, but it does contain directly relevant requirements: “minimum hardware requirements are 4GB RAM, 10GB free storage, any modern processor” and “recommended hardware requirements are 8GB or more RAM, 20GB or more free storage, a multi-core processor.”",
+          "error": null
+        }
+      ]
+    },
+    {
+      "run_index": 0,
+      "case_id": "curated:2",
+      "golden_set": "curated",
+      "category": "multi_section_synthesis",
+      "input": "How do Moltbot's persistent memory and multi-channel integration work together to change how users interact with it?",
+      "expected_output": "Moltbot maintains long-term memory across sessions using local file storage, remembering previous conversations, user preferences, ongoing project context, custom instructions, and file/system configurations. This turns stateless question-answering into stateful collaboration. Combined with native integration across 9+ messaging channels (such as WhatsApp, Telegram, Discord, Slack, and Signal), users can reach the assistant from any device using familiar apps while it retains context. Together these give a continuous, device-agnostic collaboration that persists across days or weeks.",
+      "session_id": "evaluation_session_930dfdc0-5a86-49b5-a440-3f500286d3dc",
+      "latency_seconds": 8.62,
+      "app": {
+        "resolved_model_ids": [
+          "gpt-6-luna"
+        ],
+        "per_model": {
+          "gpt-6-luna": {
+            "input_tokens": 2489,
+            "cached_input_tokens": 0,
+            "output_tokens": 196,
+            "reasoning_tokens": 0,
+            "cost_usd": 0.0003469
+          }
+        },
+        "input_tokens": 2489,
+        "cached_input_tokens": 0,
+        "output_tokens": 196,
+        "reasoning_tokens": 0,
+        "cost_usd": 0.0003469,
+        "record_run_estimated_cost_usd": 0.0003469
+      },
+      "actual_output": "Moltbot’s local file-based memory retains conversation history, preferences, and ongoing project context across sessions. Its multi-channel integration lets users reach it through familiar messaging apps and devices. Together, these features make interaction less like restarting a stateless chatbot each time and more like ongoing collaboration: users can continue work across sessions and communicate through the channel that suits them.",
+      "trace": {
+        "route": "retrieve",
+        "tool_calls": {
+          "vectorstore": 1,
+          "web": 0,
+          "other": 0
+        },
+        "retrieved_doc_sources": {
+          "paper": 5,
+          "web": 0
+        },
+        "retrieved_count": 5,
+        "unique_chunk_count": 5,
+        "retrieval_attempts": 1,
+        "rewrite_count": 0,
+        "retrieval_context_sha256": "a584e44fbc8f7daf1908cc335ccab9b0f1bedd22319aabcf392e5ae3c86b4f30"
+      },
+      "judge": {
+        "ledger_cost_usd": 0.0032766,
+        "cost_usd": 0.0032766,
+        "metric_cost_usd": 0.0032766,
+        "by_metric": {
+          "Faithfulness": 0.0006480000000000001,
+          "Answer Relevancy": 0.0002212,
+          "Contextual Precision": 0.000464,
+          "Contextual Recall": 0.00041620000000000003,
+          "Contextual Relevancy": 0.0015272
+        }
+      },
+      "success": false,
+      "metrics": [
+        {
+          "name": "Faithfulness",
+          "score": 1.0,
+          "passed": true,
+          "threshold": 0.7,
+          "evaluation_cost": 0.0006480000000000001,
+          "evaluation_model": "gpt-6-luna",
+          "reason": "The score is 1.00 because there are no contradictions; the actual output is fully consistent with the retrieval context.",
+          "error": null
+        },
+        {
+          "name": "Answer Relevancy",
+          "score": 1.0,
+          "passed": true,
+          "threshold": 0.7,
+          "evaluation_cost": 0.0002212,
+          "evaluation_model": "gpt-6-luna",
+          "reason": "The score is 1.00 because there are no identified irrelevant statements, so the answer is fully relevant to the question.",
+          "error": null
+        },
+        {
+          "name": "Contextual Precision",
+          "score": 0.8875,
+          "passed": true,
+          "threshold": 0.7,
+          "evaluation_cost": 0.000464,
+          "evaluation_model": "gpt-6-luna",
+          "reason": "The score is 0.89 because the first two nodes in the retrieval contexts directly explain how persistent memory and multi-channel access enable stateful, context-retaining collaboration, and the fourth and fifth provide relevant supporting details. It is not higher because the third node in the retrieval contexts focuses on security risks, including “External Prompt Injection” and data exfiltration, rather than the user interaction asked about, and the fifth node does not explain the features’ combined effect.",
+          "error": null
+        },
+        {
+          "name": "Contextual Recall",
+          "score": 1.0,
+          "passed": true,
+          "threshold": 0.7,
+          "evaluation_cost": 0.00041620000000000003,
+          "evaluation_model": "gpt-6-luna",
+          "reason": "The score is 1.00 because all sentences are supported by nodes in retrieval context: nodes 1 and 2 describe local long-term memory and retained context (sentence 1), node 1 explains stateful collaboration (sentence 2), and node 1 supports the messaging channels, familiar access across devices, and continuity over days or weeks (sentences 2–3). Great alignment throughout!",
+          "error": null
+        },
+        {
+          "name": "Contextual Relevancy",
+          "score": 0.59375,
+          "passed": false,
+          "threshold": 0.7,
+          "evaluation_cost": 0.0015272,
+          "evaluation_model": "gpt-6-luna",
+          "reason": "The score is 0.59 because relevant statements explain that Moltbot works across familiar messaging channels and retains long-term context, making interaction “stateful collaboration” from different devices. However, many context statements concern unrelated features, and the connection between memory and multi-channel use is only partly explained.",
+          "error": null
+        }
+      ]
+    },
+    {
+      "run_index": 0,
+      "case_id": "curated:3",
+      "golden_set": "curated",
+      "category": "security",
+      "input": "What is the main security concern with how Moltbot stores sensitive data such as API keys?",
+      "expected_output": "All data persists locally on the user's filesystem in plaintext Markdown and JSON files, including API keys and credentials stored in plaintext. Configuration lives in ~/.moltbot/config/ alongside session histories and credentials. Because these secrets are unencrypted, anyone with filesystem access, a VPS provider, or malware could read all stored credentials, which is called out as a significant security concern.",
+      "session_id": "evaluation_session_cd5bfff0-a706-4313-9dc5-1e69e5781635",
+      "latency_seconds": 11.168,
+      "app": {
+        "resolved_model_ids": [
+          "gpt-6-luna"
+        ],
+        "per_model": {
+          "gpt-6-luna": {
+            "input_tokens": 3532,
+            "cached_input_tokens": 0,
+            "output_tokens": 166,
+            "reasoning_tokens": 0,
+            "cost_usd": 0.0004362
+          }
+        },
+        "input_tokens": 3532,
+        "cached_input_tokens": 0,
+        "output_tokens": 166,
+        "reasoning_tokens": 0,
+        "cost_usd": 0.0004362,
+        "record_run_estimated_cost_usd": 0.0004362
+      },
+      "actual_output": "Moltbot stores sensitive data, including API keys, in plaintext Markdown and JSON files on the local filesystem, without encryption at rest. As a result, any process or attacker with access to those files may be able to extract the credentials.",
+      "trace": {
+        "route": "retrieve",
+        "tool_calls": {
+          "vectorstore": 3,
+          "web": 0,
+          "other": 0
+        },
+        "retrieved_doc_sources": {
+          "paper": 8,
+          "web": 0
+        },
+        "retrieved_count": 8,
+        "unique_chunk_count": 8,
+        "retrieval_attempts": 3,
+        "rewrite_count": 0,
+        "retrieval_context_sha256": "e828b37c224a7bc25b57b523186171addb17d9e88be00d8b3792114ea2187187"
+      },
+      "judge": {
+        "ledger_cost_usd": 0.004323,
+        "cost_usd": 0.004323,
+        "metric_cost_usd": 0.004323,
+        "by_metric": {
+          "Faithfulness": 0.0008622,
+          "Answer Relevancy": 0.0002074,
+          "Contextual Precision": 0.0004893,
+          "Contextual Recall": 0.00044900000000000007,
+          "Contextual Relevancy": 0.0023150999999999996
+        }
+      },
+      "success": false,
+      "metrics": [
+        {
+          "name": "Faithfulness",
+          "score": 1.0,
+          "passed": true,
+          "threshold": 0.7,
+          "evaluation_cost": 0.0008622,
+          "evaluation_model": "gpt-6-luna",
+          "reason": "The score is 1.00 because there are no contradictions; the actual output is fully consistent with the retrieval context.",
+          "error": null
+        },
+        {
+          "name": "Answer Relevancy",
+          "score": 1.0,
+          "passed": true,
+          "threshold": 0.7,
+          "evaluation_cost": 0.0002074,
+          "evaluation_model": "gpt-6-luna",
+          "reason": "The score is 1.00 because there were no irrelevant statements; the answer fully addressed the question.",
+          "error": null
+        },
+        {
+          "name": "Contextual Precision",
+          "score": 1.0,
+          "passed": true,
+          "threshold": 0.7,
+          "evaluation_cost": 0.0004893,
+          "evaluation_model": "gpt-6-luna",
+          "reason": "The score is 1.00 because the relevant retrieval-context nodes are ranked first: nodes 1–3 directly explain that API keys and credentials are stored in plaintext without encryption and can be extracted if the host or files are accessed. The irrelevant nodes are ranked lower, beginning at node 4, which discusses “localhost trust, weak authentication, and exposed deployments” instead of plaintext storage; the later irrelevant nodes likewise address operational issues or broader compromise risks rather than the specific storage concern.",
+          "error": null
+        },
+        {
+          "name": "Contextual Recall",
+          "score": 1.0,
+          "passed": true,
+          "threshold": 0.7,
+          "evaluation_cost": 0.00044900000000000007,
+          "evaluation_model": "gpt-6-luna",
+          "reason": "The score is 1.00 because node 1 in retrieval context supports sentences 1–2, and nodes 2 and 3 support sentence 3, fully grounding the expected output. Great match!",
+          "error": null
+        },
+        {
+          "name": "Contextual Relevancy",
+          "score": 0.28888888888888886,
+          "passed": false,
+          "threshold": 0.7,
+          "evaluation_cost": 0.0023150999999999996,
+          "evaluation_model": "gpt-6-luna",
+          "reason": "The score is 0.29 because much of the context addresses unrelated risks such as browser control, access controls, and internet exposure, but it directly answers the question by stating that Moltbot stores API keys in plaintext local files and “does not encrypt stored credentials at rest,” making them extractable if the host or user files are compromised.",
+          "error": null
+        }
+      ]
+    },
+    {
+      "run_index": 0,
+      "case_id": "curated:4",
+      "golden_set": "curated",
+      "category": "unanswerable",
+      "input": "What was Moltbot's total revenue in 2025?",
+      "expected_output": "The report does not provide any revenue figures for Moltbot. It is an open-source project released under the MIT license, and the document discusses adoption metrics (such as GitHub stars) and the cost of running it rather than any revenue. Based on the provided context, this information is not available.",
+      "session_id": "evaluation_session_fc0ce3bb-8f3f-4598-a39b-4f2f1a327860",
+      "latency_seconds": 16.168,
+      "app": {
+        "resolved_model_ids": [
+          "gpt-6-luna"
+        ],
+        "per_model": {
+          "gpt-6-luna": {
+            "input_tokens": 4906,
+            "cached_input_tokens": 0,
+            "output_tokens": 254,
+            "reasoning_tokens": 0,
+            "cost_usd": 0.0006176
+          }
+        },
+        "input_tokens": 4906,
+        "cached_input_tokens": 0,
+        "output_tokens": 254,
+        "reasoning_tokens": 0,
+        "cost_usd": 0.0006176,
+        "record_run_estimated_cost_usd": 0.0006176
+      },
+      "actual_output": "The provided context does not contain Moltbot’s 2025 annual revenue, total revenue, earnings, or financial results.",
+      "trace": {
+        "route": "retrieve",
+        "tool_calls": {
+          "vectorstore": 2,
+          "web": 0,
+          "other": 0
+        },
+        "retrieved_doc_sources": {
+          "paper": 8,
+          "web": 0
+        },
+        "retrieved_count": 8,
+        "unique_chunk_count": 8,
+        "retrieval_attempts": 1,
+        "rewrite_count": 1,
+        "retrieval_context_sha256": "47a4ffa5281ac9ec91721f3b0ab3108acbc9ad2b78e8ba323ac686e7d200ef93"
+      },
+      "judge": {
+        "ledger_cost_usd": 0.0045372,
+        "cost_usd": 0.0045372,
+        "metric_cost_usd": 0.0045372,
+        "by_metric": {
+          "Faithfulness": 0.0007118000000000001,
+          "Answer Relevancy": 0.0002254,
+          "Contextual Precision": 0.0004987,
+          "Contextual Recall": 0.000465,
+          "Contextual Relevancy": 0.0026363
+        }
+      },
+      "success": false,
+      "metrics": [
+        {
+          "name": "Faithfulness",
+          "score": 1.0,
+          "passed": true,
+          "threshold": 0.7,
+          "evaluation_cost": 0.0007118000000000001,
+          "evaluation_model": "gpt-6-luna",
+          "reason": "The score is 1.00 because there are no contradictions; the actual output is fully consistent with the retrieval context.",
+          "error": null
+        },
+        {
+          "name": "Answer Relevancy",
+          "score": 1.0,
+          "passed": true,
+          "threshold": 0.7,
+          "evaluation_cost": 0.0002254,
+          "evaluation_model": "gpt-6-luna",
+          "reason": "The score is 1.00 because there were no irrelevant statements, so the response was fully relevant to the question.",
+          "error": null
+        },
+        {
+          "name": "Contextual Precision",
+          "score": 1.0,
+          "passed": true,
+          "threshold": 0.7,
+          "evaluation_cost": 0.0004987,
+          "evaluation_model": "gpt-6-luna",
+          "reason": "The score is 1.00 because the relevant nodes in retrieval contexts are ranked first: the first says the report does not mention revenue, the second distinguishes costs from revenue, and the third says Moltbot is free and open-source. The irrelevant nodes appear only from rank 4 onward; for example, the fourth contains references but “no information about Moltbot revenue,” and the fifth discusses suitability and risks rather than financial reporting. The relevant nodes therefore rank ahead of all irrelevant ones.",
+          "error": null
+        },
+        {
+          "name": "Contextual Recall",
+          "score": 1.0,
+          "passed": true,
+          "threshold": 0.7,
+          "evaluation_cost": 0.000465,
+          "evaluation_model": "gpt-6-luna",
+          "reason": "The score is 1.00 because nodes 1, 2, and 3 in retrieval context support the full response: they describe GitHub stars, MIT-licensed open-source status, and operating costs, while providing no revenue figures, matching each sentence. Great alignment!",
+          "error": null
+        },
+        {
+          "name": "Contextual Relevancy",
+          "score": 0.0,
+          "passed": false,
+          "threshold": 0.7,
+          "evaluation_cost": 0.0026363,
+          "evaluation_model": "gpt-6-luna",
+          "reason": "The score is 0.00 because the context contains no statements relevant to Moltbot’s total revenue in 2025; it discusses items such as “achieving over 103,000 stars” and “Moltbot monthly cost estimates,” which are popularity and cost figures, not revenue.",
+          "error": null
+        }
+      ]
+    },
+    {
+      "run_index": 0,
+      "case_id": "curated:5",
+      "golden_set": "curated",
+      "category": "numeric",
+      "input": "How quickly did Moltbot grow on GitHub in terms of stars?",
+      "expected_output": "Moltbot grew exceptionally fast: about 9,000 stars in the first 24 hours after going viral, 60,000+ stars within 72 hours (January 24-27, 2026), and 103,000+ stars within three months of its initial launch. It also gained 17,830 stars in a single 24-hour period (January 28-29, 2026) and trended #1 on GitHub.",
+      "session_id": "evaluation_session_a0308eed-b5e5-440a-b288-da9206b575f2",
+      "latency_seconds": 8.169,
+      "app": {
+        "resolved_model_ids": [
+          "gpt-6-luna"
+        ],
+        "per_model": {
+          "gpt-6-luna": {
+            "input_tokens": 2585,
+            "cached_input_tokens": 0,
+            "output_tokens": 159,
+            "reasoning_tokens": 0,
+            "cost_usd": 0.000338
+          }
+        },
+        "input_tokens": 2585,
+        "cached_input_tokens": 0,
+        "output_tokens": 159,
+        "reasoning_tokens": 0,
+        "cost_usd": 0.000338,
+        "record_run_estimated_cost_usd": 0.000338
+      },
+      "actual_output": "Moltbot gained 9,000 stars in its first 24 hours after going viral, passed 60,000 within 72 hours, and exceeded 103,000 stars within three months of launch. It also gained 17,830 stars in a single 24-hour period on January 28–29, 2026.",
+      "trace": {
+        "route": "retrieve",
+        "tool_calls": {
+          "vectorstore": 1,
+          "web": 0,
+          "other": 0
+        },
+        "retrieved_doc_sources": {
+          "paper": 5,
+          "web": 0
+        },
+        "retrieved_count": 5,
+        "unique_chunk_count": 5,
+        "retrieval_attempts": 1,
+        "rewrite_count": 0,
+        "retrieval_context_sha256": "489ef0e5020033163103b1be84e978d6a8213b702bd2e26a016da3202d51e917"
+      },
+      "judge": {
+        "ledger_cost_usd": 0.003177,
+        "cost_usd": 0.003177,
+        "metric_cost_usd": 0.003177,
+        "by_metric": {
+          "Faithfulness": 0.0006161000000000001,
+          "Answer Relevancy": 0.00022769999999999998,
+          "Contextual Precision": 0.0004187,
+          "Contextual Recall": 0.0003771,
+          "Contextual Relevancy": 0.0015374
+        }
+      },
+      "success": false,
+      "metrics": [
+        {
+          "name": "Faithfulness",
+          "score": 1.0,
+          "passed": true,
+          "threshold": 0.7,
+          "evaluation_cost": 0.0006161000000000001,
+          "evaluation_model": "gpt-6-luna",
+          "reason": "The score is 1.00 because there are no contradictions; the actual output is fully faithful to the retrieval context.",
+          "error": null
+        },
+        {
+          "name": "Answer Relevancy",
+          "score": 1.0,
+          "passed": true,
+          "threshold": 0.7,
+          "evaluation_cost": 0.00022769999999999998,
+          "evaluation_model": "gpt-6-luna",
+          "reason": "The score is 1.00 because there are no irrelevant statements; the response directly addresses the question about Moltbot’s GitHub star growth.",
+          "error": null
+        },
+        {
+          "name": "Contextual Precision",
+          "score": 0.95,
+          "passed": true,
+          "threshold": 0.7,
+          "evaluation_cost": 0.0004187,
+          "evaluation_model": "gpt-6-luna",
+          "reason": "The score is 0.95 because the first three nodes in the retrieval contexts are relevant and directly provide Moltbot’s rapid star growth, including its 24-hour, 72-hour, and three-month figures. The irrelevant fourth node is ranked fourth, where it belongs: it “lists sources and references but does not itself provide the star-growth figures.” The relevant fifth node still provides the needed figures, so the low-ranked irrelevant node has only a small effect on precision.",
+          "error": null
+        },
+        {
+          "name": "Contextual Recall",
+          "score": 1.0,
+          "passed": true,
+          "threshold": 0.7,
+          "evaluation_cost": 0.0003771,
+          "evaluation_model": "gpt-6-luna",
+          "reason": "The score is 1.00 because node(s) in retrieval context 1, 2, 3, and 5 support all claims in the expected output: the rapid star growth, the 17,830-star daily gain, and the #1 GitHub trending ranking. Great coverage.",
+          "error": null
+        },
+        {
+          "name": "Contextual Relevancy",
+          "score": 0.46875,
+          "passed": false,
+          "threshold": 0.7,
+          "evaluation_cost": 0.0015374,
+          "evaluation_model": "gpt-6-luna",
+          "reason": "The score is 0.47 because the context directly answers the question with rapid star-growth figures—“9,000 stars in the first 24 hours,” “more than 60,000 stars within 72 hours,” and “17,830 stars in a single 24-hour period”—but much of the surrounding material is irrelevant, discussing forks, commits, security, and other topics.",
+          "error": null
+        }
+      ]
+    },
+    {
+      "run_index": 0,
+      "case_id": "curated:6",
+      "golden_set": "curated",
+      "category": "timeline",
+      "input": "The project changed names more than once. List every name it had, in order, with the dates.",
+      "expected_output": "The project had three names in sequence: (1) Clawdbot, launched November 24, 2025; (2) Moltbot, renamed on January 27, 2026 after Anthropic's trademark notice; and (3) OpenClaw, renamed on January 30, 2026 (just three days later), while the core functionality and codebase remained unchanged.",
+      "session_id": "evaluation_session_7e8a3105-0f09-4dd9-915f-92daa18ffc52",
+      "latency_seconds": 8.806,
+      "app": {
+        "resolved_model_ids": [
+          "gpt-6-luna"
+        ],
+        "per_model": {
+          "gpt-6-luna": {
+            "input_tokens": 3306,
+            "cached_input_tokens": 0,
+            "output_tokens": 167,
+            "reasoning_tokens": 0,
+            "cost_usd": 0.0004141
+          }
+        },
+        "input_tokens": 3306,
+        "cached_input_tokens": 0,
+        "output_tokens": 167,
+        "reasoning_tokens": 0,
+        "cost_usd": 0.0004141,
+        "record_run_estimated_cost_usd": 0.0004141
+      },
+      "actual_output": "- **Clawdbot** — launched November 24, 2025.\n- **Moltbot** — adopted January 27, 2026.\n- **OpenClaw** — adopted January 30, 2026.",
+      "trace": {
+        "route": "retrieve",
+        "tool_calls": {
+          "vectorstore": 1,
+          "web": 0,
+          "other": 0
+        },
+        "retrieved_doc_sources": {
+          "paper": 8,
+          "web": 0
+        },
+        "retrieved_count": 8,
+        "unique_chunk_count": 8,
+        "retrieval_attempts": 1,
+        "rewrite_count": 0,
+        "retrieval_context_sha256": "4fe7fc94612da19f9b17aed675f72c9075d80ac34030063b686d85b1935709a6"
+      },
+      "judge": {
+        "ledger_cost_usd": 0.0044739,
+        "cost_usd": 0.0044739,
+        "metric_cost_usd": 0.0044739,
+        "by_metric": {
+          "Faithfulness": 0.000655,
+          "Answer Relevancy": 0.00023260000000000002,
+          "Contextual Precision": 0.0007030999999999999,
+          "Contextual Recall": 0.0003601,
+          "Contextual Relevancy": 0.0025231000000000003
+        }
+      },
+      "success": false,
+      "metrics": [
+        {
+          "name": "Faithfulness",
+          "score": 1.0,
+          "passed": true,
+          "threshold": 0.7,
+          "evaluation_cost": 0.000655,
+          "evaluation_model": "gpt-6-luna",
+          "reason": "The score is 1.00 because there are no contradictions; the actual output is fully faithful to the retrieval context.",
+          "error": null
+        },
+        {
+          "name": "Answer Relevancy",
+          "score": 1.0,
+          "passed": true,
+          "threshold": 0.7,
+          "evaluation_cost": 0.00023260000000000002,
+          "evaluation_model": "gpt-6-luna",
+          "reason": "The score is 1.00 because there are no irrelevant statements; however, without the project details or an actual answer, the names and dates cannot be assessed.",
+          "error": null
+        },
+        {
+          "name": "Contextual Precision",
+          "score": 1.0,
+          "passed": true,
+          "threshold": 0.7,
+          "evaluation_cost": 0.0007030999999999999,
+          "evaluation_model": "gpt-6-luna",
+          "reason": "The score is 1.00 because all relevant nodes in the retrieval contexts are ranked before the irrelevant ones: the first node gives the full sequence and dates, and the next five support the timeline or individual renames. The irrelevant seventh node says it “does not provide the sequence of names or their dates,” and the eighth only says “Moltbot (formerly Clawdbot)” without dates or the later rename, so both are appropriately ranked lower.",
+          "error": null
+        },
+        {
+          "name": "Contextual Recall",
+          "score": 1.0,
+          "passed": true,
+          "threshold": 0.7,
+          "evaluation_cost": 0.0003601,
+          "evaluation_model": "gpt-6-luna",
+          "reason": "The score is 1.00 because the expected output’s sentence is fully supported by nodes in retrieval context: node 1 provides the three names, dates, and unchanged functionality and codebase, while node 2 attributes the first rename to Anthropic’s trademark notice. Great coverage!",
+          "error": null
+        },
+        {
+          "name": "Contextual Relevancy",
+          "score": 0.574468085106383,
+          "passed": false,
+          "threshold": 0.7,
+          "evaluation_cost": 0.0025231000000000003,
+          "evaluation_model": "gpt-6-luna",
+          "reason": "The score is 0.57 because the context directly provides the requested names and dates—“Clawdbot on November 24, 2025,” “Moltbot on January 27, 2026,” and “OpenClaw on January 30, 2026”—but much of it is unrelated, covering details such as security, capabilities, and popularity rather than the rename sequence.",
+          "error": null
+        }
+      ]
+    }
+  ]
+}

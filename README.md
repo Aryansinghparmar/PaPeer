@@ -263,23 +263,26 @@ Claims the context neither supports nor contradicts count as faithful. Faithfuln
 expected answer, retrieval quality, or completeness. Since the app and the judge are the same model, scores may be
 inflated by self-preference bias.
 
-### Current results (21 Oct 2026, `python scripts/reproduce_eval.py`, $0.16)
+### Current results (21 Oct 2026, commit `0e654d2`, `python scripts/reproduce_eval.py --budget-usd 1.00`, $0.16)
+
+Full report: [`results/SUMMARY.md`](results/SUMMARY.md).
 
 | Metric | Mean | 95% CI | n |
 |---|---:|---|---|
 | Router accuracy | 1.000 | — | 30 cases × 3 runs |
-| Faithfulness | 1.000 | [1.0, 1.0] | 17 × 3 |
-| Answer Relevancy | 0.998 | [0.993, 1.0] | 17 × 3 |
-| Contextual Precision | 0.910 | [0.78, 0.99] | 17 × 1 |
-| Contextual Recall | 0.908 | [0.81, 0.99] | 17 × 1 |
-| Contextual Relevancy | 0.541 | [0.41, 0.68] | 17 × 1 |
+| Faithfulness | 0.992 | [0.975, 1.0] | 17 × 3 |
+| Answer Relevancy | 0.999 | [0.996, 1.0] | 17 × 3 |
+| Contextual Precision | 0.964 | [0.93, 0.99] | 17 × 1 |
+| Contextual Recall | 0.937 | [0.87, 0.99] | 17 × 1 |
+| Contextual Relevancy | 0.533 | [0.41, 0.65] | 17 × 1 |
 
 How to read these:
-- **Faithfulness is at the ceiling.** An independent 3-run repeat gave 0.998 [0.994, 1.0] (`results/ab_answer_reasoning.md`), so this set no longer separates configurations.
+- **Faithfulness is close to the ceiling.** Two earlier 3-run evaluations of the same configuration gave 1.000 and 0.998, so run-to-run variance is about ±0.01, and this set barely separates configurations.
+- **The misses are real.** On `synthetic:4`, the answer repeats the question's own unsupported wording ("API-key sprawl", "vibe-coded"). On `synthetic:7`, it calls an existing audit-logging measure a future feature. Leading synthetic questions are one reason a larger, hand-written set is the next step.
 - **The unanswerable question is answered correctly in every run** (it says the context does not contain the answer), but it scores 0 on the contextual metrics by construction.
 - **Contextual Relevancy is low** because 1000-character chunks include many sentences unrelated to the question.
 - **Router accuracy** comes from a small hand-labelled set and is a smoke test, not a benchmark.
-- **A/B on reasoning in the answer step** (`none` vs `low`, judged by the same fixed judge): no measurable difference (paired ΔFaithfulness −0.006, 95% CI [−0.021, +0.004]), so the default stays `none`.
+- **A/B on reasoning in the answer step** (`none` vs `low`, judged by the same fixed judge): no measurable difference (paired ΔFaithfulness −0.006, 95% CI [−0.021, +0.004]), so the default stays `none` (`results/ab_answer_reasoning.md`).
 
 **Earlier results.** The August 2026 runs used `gpt-5-mini` and the original dense-only pipeline, including the 0.981 Faithfulness run on
 the 10 synthetic goldens. They are archived in `results/archive/2026-08_gpt-5-mini/` with their provenance and a
